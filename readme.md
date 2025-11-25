@@ -93,7 +93,7 @@ php bin/console doctrine:fixtures:load --env=prod
 ```
 sistema-activos-fijos/
 ├── bin/
-├── config/
+├── config/             # 🎮 Configuración del sistema
 ├── migrations/
 ├── src/
 │   ├── Controller/      # 🎮 Controladores
@@ -136,6 +136,8 @@ Si encuentras algún problema durante la instalación o necesitas asistencia:
 
 Una vez completados todos los pasos, tu sistema de gestión de activos fijos estará listo para usar. 
 
+Si quiere enviar alguna donación para seguir trabajando en buenos sistemas a mi cuenta paypal jghernandez053@gmail.com. Quiero realizar buenos desarrollos pero necesito de una buena motivación 😄.
+
 **✨ ¡Gracias por implementar nuestro sistema!**
 
 ---
@@ -163,5 +165,5 @@ Una vez completados todos los pasos, tu sistema de gestión de activos fijos est
 
 ---
 
-*Última actualización: ${new Date().toLocaleDateString()}*  
+*Última actualización: 25/11/2025*  
 *Desarrollado con ❤️ usando Symfony*
