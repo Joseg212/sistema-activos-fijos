@@ -1,0 +1,152 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{% block contentDashboard %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{{ form_start(form,{'attr':{'role':'form','novalidate':'novalidate','class':'form-inline'}}) }}
+<div class="row ml-2">
+    <div class="col-md-10 af-content-data ventana1">
+        <div class="row x_title">
+            <div class="col-lg-12">
+                    <h3 class="af-title-h3">ACTIVO FIJO</h3>
+                    <h4><small>Modificar los datos del activo fijo en la ubicación seleccionada.</small> </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ form_label(form.id_af) }}
+                {{ form_widget(form.id_af) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ form_label(form.id_ubic) }}
+                {{ form_widget(form.id_ubic) }}
+            </div>
+            <div class="col-md-6 form-group">
+                {{ form_label(form.code_activof) }}
+                {{ form_widget(form.code_activof) }}
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 form-group">
+                {{ form_label(form.id_clase) }}
+                {{ form_widget(form.id_clase) }}
+                <span class="text-danger">{{ form_errors(form.id_clase) }}</span>          
+            </div>
+            <div class="col-md-6 form-group">
+                {{ form_label(form.descrip) }}
+                {{ form_widget(form.descrip) }}
+                <span class="text-danger">{{ form_errors(form.descrip) }}</span>          
+            </div>
+            <div class="col-md-3 form-group">
+                {{ form_label(form.fecha_compra) }}
+                {{ form_widget(form.fecha_compra) }}
+                <span class="text-danger">{{ form_errors(form.fecha_compra) }}</span>          
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 form-group">
+                {{ form_label(form.nrofact) }}
+                {{ form_widget(form.nrofact) }}
+                <span class="text-danger">{{ form_errors(form.nrofact) }}</span>          
+            </div>
+            <div class="col-md-6 form-group">
+                {{ form_label(form.distribuidor) }}
+                {{ form_widget(form.distribuidor) }}
+                <span class="text-danger">{{ form_errors(form.distribuidor) }}</span>          
+            </div>
+            <div class="col-md-3 form-group">
+                {{ form_label(form.rif) }}
+                {{ form_widget(form.rif) }}
+                <span class="text-danger">{{ form_errors(form.rif) }}</span>          
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 form-group">
+                {{ form_label(form.costo) }}
+                {{ form_widget(form.costo) }}
+                <span class="text-danger">{{ form_errors(form.costo) }}</span>          
+            </div>
+            <div class="col-md-3 form-group">
+                {{ form_label(form.impuesto) }}
+                {{ form_widget(form.impuesto) }}
+                <span class="text-danger">{{ form_errors(form.impuesto) }}</span>          
+            </div>
+            <div class="col-md-3 form-group">
+                {{ form_label(form.costo_total) }}
+                {{ form_widget(form.costo_total) }}
+                <span class="text-danger">{{ form_errors(form.costo_total) }}</span>          
+            </div>
+            <div class="col-md-3 form-group">
+                {{ form_label(form.costo_flete) }}
+                {{ form_widget(form.costo_flete) }}
+                <span class="text-danger">{{ form_errors(form.costo_flete) }}</span>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ form_label(form.num_serie) }}
+                {{ form_widget(form.num_serie) }}
+                <span class="text-danger">{{ form_errors(form.num_serie) }}</span>          
+            </div>
+            <div class="col-md-6 form-group">
+                {{ form_label(form.edo_fisico) }}
+                {{ form_widget(form.edo_fisico) }}
+                <span class="text-danger">{{ form_errors(form.edo_fisico) }}</span>          
+            </div>
+        </div>
+        <!-- Botones -->
+        <div class="row mt-4" style="clear:left">
+            <div class="col-md-12">
+                <div class="form-group" style="float:right;clear:right;"> 
+                    {{ form_widget(form.write) }}
+                    <a href="{{path('app_activofijo')}}" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+        <!-- Botones -->
+    </div>
+    <div class="col-md-2">
+        <h4 class="_orange">INFORMACION:</h4>
+        <hr class="line_style" />
+        <p class="af-p-12">Ingrese los datos solicitado, para culminar y guardar la información hacer clic en el Guardar</p>
+    </div>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+
+    $(document).ready(function(e){
+        $("#activo_fijo_costo").change(function(e){
+            var monto = parseFloat(String($(this).val()).replace(',',''));                
+            var impuesto = parseFloat(String($("#activo_fijo_impuesto").val()).replace(',',''));
+
+            var total = (monto+impuesto).toFixed(2);
+
+            $("#activo_fijo_costo_total").val(total);
+
+        });
+        $("#activo_fijo_impuesto").change(function(e){
+            var impuesto = parseFloat(String($(this).val()).replace(',',''));                
+            var monto = parseFloat(String($("#activo_fijo_costo").val()).replace(',',''));
+
+            var total = (monto+impuesto).toFixed(2);
+            
+            $("#activo_fijo_costo_total").val(total);
+        });
+
+    });
+
+</script>
+<style> 
+    @media (min-width:576px)  {
+        .form-inline .form-control {
+            width: none !important;
+        }
+    }
+</style>
+{% endblock %}

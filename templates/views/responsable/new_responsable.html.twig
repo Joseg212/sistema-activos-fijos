@@ -1,0 +1,77 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{% block contentDashboard %}
+
+{{ form_start(form,{'attr':{'role':'form','novalidate':'novalidate','class':'form-inline'}}) }}
+<div class="row ml-2">
+    <div class="col-md-10 af-content-data ventana1">
+        <div class="row x_title">
+            <div class="col-lg-12">
+                    <h3 class="af-title-h3">RESPONSABLE</h3>
+                    <h4><small>El responsable es  el que hace mantenimiento o reparación de un activo fijo, también cuando se efectúa un traslado del activo fijo.</small> </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ form_label(form.nombre) }}
+                {{ form_widget(form.nombre) }}
+                <span class="text-danger">{{ form_errors(form.nombre) }}</span>          
+            </div>
+            <div class="col-md-6 form-group">
+                {{ form_label(form.apellido) }}
+                {{ form_widget(form.apellido) }}
+                <span class="text-danger">{{ form_errors(form.apellido) }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ form_label(form.cargo) }}
+                {{ form_widget(form.cargo) }}
+                <span class="text-danger">{{ form_errors(form.cargo) }}</span>          
+            </div>
+            <div class="col-md-6 form-group">
+                {{ form_label(form.telefono) }}
+                {{ form_widget(form.telefono) }}
+                <span class="text-danger">{{ form_errors(form.telefono) }}</span>          
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ form_label(form.movil) }}
+                {{ form_widget(form.movil) }}
+                <span class="text-danger">{{ form_errors(form.movil) }}</span>          
+            </div>
+            <div class="col-md-6 form-group">
+            </div>
+        </div>
+        <!-- Botones -->
+        <div class="row mt-4" style="clear:left">
+            <div class="col-md-12">
+                <div class="form-group" style="float:right;clear:right;"> 
+                    {{ form_widget(form.write) }}
+                    <a href="{{path('app_responsable')}}" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+        <!-- Botones -->
+    </div>
+    <div class="col-md-2">
+        <h4 class="_orange">INFORMACION:</h4>
+        <hr class="line_style" />
+        <p class="af-p-12">Ingrese los datos solicitado, para culminar y guardar la informacion hacer clic en el Guardar</p>
+    </div>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+
+    $(document).ready(function(e){
+
+    });
+
+</script>
+{% endblock %}

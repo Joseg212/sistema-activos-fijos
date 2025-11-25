@@ -1,0 +1,68 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{% block contentDashboard %}
+{{ form_start(form,{'attr':{'role':'form','novalidate':'novalidate','class':'form-inline'}}) }}
+<div class="row ml-2">
+    <div class="col-md-10 af-content-data ventana1">
+        <div class="row x_title">
+            <div class="col-md-12">
+                    <h3 class="af-title-h3">UBICACIÓN</h3>
+                    <h4><small>Modificar ubicación  a una propiedad seleccionada </small> </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ form_label(form.id_ubic) }}
+                {{ form_widget(form.id_ubic) }}
+            </div>
+            <div class="col-md-6 form-group">
+                {{ form_label(form.id_propiedad) }}
+                {{ form_widget(form.id_propiedad) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ form_label(form.ubicacion) }}
+                {{ form_widget(form.ubicacion) }}
+                <span class="text-danger">{{ form_errors(form.ubicacion) }}</span>          
+            </div>
+            <div class="col-md-6 form-group">
+                {{ form_label(form.nota) }}
+                {{ form_widget(form.nota) }}
+                <span class="text-danger">{{ form_errors(form.nota) }}</span>          
+            </div>
+        </div>
+        <!-- Botones -->
+        <div class="row mt-4" style="clear:left">
+            <div class="col-md-12">
+                <div class="form-group" style="float:right;clear:right;"> 
+                    {{ form_widget(form.write) }}
+                    <a href="{{path('app_ubicacion')}}" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+        <!--  Botones -->
+    </div>
+    <div class="col-md-2">
+        <h4 class="_orange">INFORMACION:</h4>
+        <hr class="line_style" />
+        <p class="af-p-12">Ingrese los datos solicitado, para culminar y guardar la información hacer clic en el Guardar</p>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+
+    $(document).ready(function(e){
+
+    });
+
+</script>
+{% endblock %}

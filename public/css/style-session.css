@@ -1,0 +1,66 @@
+.win-session {
+	display:inherit;
+	position:absolute;
+	z-index: 10;	
+	z-index:20;
+	margin:auto;
+	padding: 0rem 0rem;
+	width: 20rem;
+	border-radius: 2rem 2rem;
+	margin-left:auto !important;
+	margin-right:auto !important;
+	margin-top:-52px;
+	left:0;
+	right:0;
+	top:30%;
+	background-color:#ffffff;
+	overflow:hidden;
+	font-family: TimeBurner,Helvetica;
+}
+.win-session form {
+	padding-top: 1.5rem;
+}
+.win-session input {
+	font-weight: 700;
+	color:#2ca4c5 !important;
+}
+
+.win-session ::placeholder {
+	color:#2ca4c5 !important;
+	background-color: white;
+}
+.win-session ::-ms-input-placeholder {
+	color:#2ca4c5 !important;
+	background-color: white;
+}
+.win-banda {
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#29aed1+0,0043ff+100 */
+	background: #29aed1; /* Old browsers */
+	background: -moz-linear-gradient(left, #29aed1 0%, #0043ff 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, #29aed1 0%,#0043ff 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, #29aed1 0%,#0043ff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#29aed1', endColorstr='#0043ff',GradientType=1 ); /* IE6-9 */	
+	padding: 0.6rem 0.6rem;
+}
+.link-personal01:focus {
+	color:#cfe0fc;
+}
+.link-personal01 {
+	color:#f9f9f9;
+}
+.login-p01 {
+	width:70%;
+	float:left;
+	clear:left;	
+	margin-top:0.3rem;
+}
+.btn-p01 {
+	border-radius:3.1rem 3.1rem;
+	font-size: 0.9rem;
+	padding: 0px 0px;
+	line-height: 3.1rem;
+	width: 3.1rem;
+	background-color: white;
+	font-weight: 700;
+	color:#2ca4c5;
+}

@@ -1,0 +1,18 @@
+{# José Hernández email: jghernandez053@gmail.com #}
+{{ include('desings/baseLogin_header.html.twig') }}
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+          {% block contentLogin %}
+
+          {% endblock %}
+          </section>
+        </div>
+
+      </div>
+    </div>
+{{ include('desings/baseLogin_footer.html.twig') }}

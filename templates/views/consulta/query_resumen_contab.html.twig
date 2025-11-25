@@ -1,0 +1,264 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{% block contentDashboard %}
+    <style>
+        .title-fecha-af {
+            display:block;
+            color:#667f98;
+            font-weight:500;
+            font-size:1.1rem;
+        }
+        .title-nrofact-af {
+            display:block;
+            color:#24a088;
+            font-weight:600;
+            font-size:1.2rem;
+        }
+        .title-cost-af{
+            display:block;
+            color:#24a088;
+            font-weight:600;
+            font-size:0.9rem;
+        }
+        .time-val-title-af {
+            display:block;
+            color:#b0b0b0;
+            font-weight:600;
+            font-size:1.1rem;
+        }
+        .box-tipom-af {
+            display:block;
+            width:100%;
+            padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+            border-radius: 1rem 1rem;
+            background-color:#667F98;
+            color:#f1f1f1;
+        }
+        .p-banco-af{
+            display:block;
+            color:#2a3f54;
+            font-weight:500;
+        }
+        .doc-banco-af {
+            display:block;
+            font-size:1.1rem;
+            font-weight:500;
+            margin-top:8px;
+        }
+        .rif-proveedor-af {
+            display:block;
+            font-size:1.1rem;
+            font-weight:500;
+            margin-top:8px;
+        }
+        .detalle-af-01 {
+            display:block;
+            width:100%;
+            padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+            border-radius: 1rem 1rem;
+            background-color:#667F98;
+            color:#f1f1f1;
+        }
+        .alert-mejora-af {
+            background-color:#667F98;
+            color:#f1f1f1;
+            padding: 1rem 1rem 1rem 1rem;
+            border-radius:1rem 1rem;
+            box-shadow:0.3rem 0.3rem 1rem;
+            font-size:1.2rem;
+        }
+    </style>
+    <div class="row">
+        <!--Pantalla oculta para seleccionar tipo de opciones-->
+        <div class="msg_sel" id="msg01">
+                <div id="message_sel">
+                    <h4 class="_orange" style="text-align:left"><span class="glyphicon glyphicon-list-alt" style="margin-right:10px;"></span>SELECCION</h4>
+                    <hr class="line_style" />
+                    <p style="text-align:left" class="af-text-win-select" >Se ha seleccionado el siguiente dato:</p>
+                    <label id="msg1"></label>
+                    <label id="msg2"></label>
+                    <p style="text-align:left;" class="af-text-win-select">¿Que desea realizar?
+                    </p>
+                    <a  href="#" id="queryWin" class="btn btn-ttc">
+                        <span class="glyphicon glyphicon-edit" style="margin-right:10px;"></span>Consultar
+                    </a>
+                    <a href="javascript://salir ;" id="outwin" class="btn btn-ttc">
+                        <span class="glyphicon glyphicon-log-out" style="margin-right:10px;"></span>Salir
+                    </a>
+                </div>
+        </div>
+        <!-- Fin Pantalla oculta para seleccionar tipo de opciones-->
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-6 left title_modify">
+                        <h3 class="af-title-h3">RESUMEN CONTABLE</h3>
+                        <h4><small>Genera los asientos contables dentro  un rango de fecha.</small> </h4>
+                </div>
+                <div class="col-lg-6 text-right" style="margin-bottom:12px;" >
+                </div>
+            </div>
+            <hr class="line-style-top-table" />
+            <form action="{{ path('app_resumen_contab')}}" id="frm_amortiz" method="post" novalidate  class="form-inline">
+            <div class="row ventana1 form-inline">
+                <div class="col-md-3 form-group">
+                    <label for="selPropiedad" class="requerid">Propiedad:</label>
+                    <select id="selPropiedad" name="idPropiedad" class="form-control">
+                    </select>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="fechaDesde" class="requerid">Fecha Desde:</label>
+                    <input type="date" id="fechaDesde" name="fechaDesde" autocomplete="off" placeholder="..."  value="{{fecha_desde}}" class="form-control"  />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="fechaHasta" class="requerid">Fecha Hasta:</label>
+                    <input type="date" id="fechaHasta" name="fechaHasta" autocomplete="off" placeholder="..."  value="{{fecha_hasta}}" class="form-control"  />
+                </div>
+                <div class="col-md-3 form-group">
+                    <div class="text-right" style="width:100%">
+                        <button type="submit" class="btn btn-dark" id="progQuery">Procesar Cálculos</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row ventana1 form-inline">
+                <div class="col-md-12 form-group">
+                    <p class="af-p-12 af-p-info">Ingrese el rango de fecha donde desee que los datos se presenta, el mismo puede ser el rango del presente ejercicio económico de la empresa o propiedad, por ejemplo: 01/01/2005  ---  31/12/2005</p>
+                </div>
+            </div>
+            </form>
+            <div class="box-af-horizontal-2"> 
+            </div>
+            {% if (muestra=="yes") %}
+            <div class="row mt-4 ml-2 box-af-style1 af-content-data ventana1">
+                <h4><small>RESUMEN DE LA CONTABILIDAD DENTRO DE LA FECHA INDICADA.</small></h4>
+                {% for fila in mayorAux %}
+                    {% if fila.debe !=0 %}
+                    <div class="row form-inline">
+                        <div class="col-md-6 form-group">
+                            <label class="middle-data-af">{{fila.cuenta}}</label>
+                            <input type="text" class="form-control text-right" value="{{fila.debeStr}}" disabled />
+                        </div>
+                        <div class="col-md-6 form-group">
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                {% for fila in mayorAux %}
+                    {% if fila.haber !=0 %}
+                    <div class="row form-inline">
+                        <div class="col-md-6 form-group">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="middle-data-af">{{fila.cuenta}}</label>
+                            <input type="text" class="form-control text-right" value="{{fila.haberStr}}" disabled />
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                    <hr style="width:100%">
+                    <div class="row form-inline">
+                        <div class="col-md-6 form-group">
+                            <label class="middle-data-af">DEBE</label>
+                            <input type="text" class="form-control text-right" value="{{totalDebe}}" disabled />
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label class="middle-data-af">HABER</label>
+                            <input type="text" class="form-control text-right" value="{{totalHaber}}" disabled />
+                        </div>
+                    </div>
+                    <div class="row mt-4 form-inline">
+                        <div class="col-md-12 form-group pl-2 pr-2">
+                            <p class="alert-mejora-af">Por favor, Compruebe que los resultados aquí obtenidos son correcto, ingresando a las siguientes opciones: Finiquito, Gastos Acumulados y Amortizaciones acumuladas. .</p>
+                        </div>
+                    </div>
+                    {% if simejora=='yes' %}
+                        <div class="row mt-4 form-inline">
+                            <div class="col-md-12 form-group pl-2 pr-2">
+                             <p class="alert-mejora-af">Existen mantenimientos por concepto de mejora para generar el asiento contable debe ir a la pantalla de Finiquito  donde se finalizara el activo y se generara uno nuevo con la fecha de procesamiento. Si ejecuto este proceso no tome en cuenta este mensaje.</p>
+                            </div>
+                        </div>
+                    {% endif %}
+            </div>
+            {% endif %}
+            <div class="row mb-4">
+                <div class="col-lg-12 text-center">
+                    <a  href="{{ path('app_default') }}" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+            <p>{{ error }}</p>
+
+        </div>
+        <div class="col-lg-2">
+                <h4 class="_orange">FILTRO PROPIEDAD:</h4>
+                <hr class="line_style" />
+                <p class="af-p-12">Deberá seleccionar la propiedad para que pueda actualiza lista desplegable de ubicaciones.</p>
+                <br>
+                <h4 class="_orange">RANGO DE FECHA:</h4>
+                <hr class="line_style" />
+                <p class="af-p-12">Puede indicar un rango de fecha, para obtener el resultado que está buscando de los gastos aplicado.</p>
+                <br>
+                <h4 class="_orange">LISTADO:</h4>
+                <hr class="line_style" />
+                <p class="af-p-12">Seleccione el activo que desea finiquitar  y pulse la opción correspondiente a Finiquito.</p>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+    var idPropiedad="select";
+    var Estatus="todos";
+
+    $(document).ready(function(e){
+        //loadLstConsulta();
+
+        var rootSelProp="{{ path('ajax_sel_prop') }}";
+
+        $.ajax({
+            data:{},
+            method:'post',
+            dataType:'json',
+            url:rootSelProp,
+            error:function(err,txt,thr){
+                $('body').empty();
+                $('body').html(err.responseText);
+            },
+            success:function(result){
+                if (result.ok=='01'){
+                    var idProp = 'select';
+                    var htmlCode = '';
+                    /*  Verificar la Cookies */
+                    if (!!$.cookie('idPropiedad')){
+                        idProp = $.cookie('idPropiedad');
+                        idPropiedad = $.cookie('idPropiedad');
+                    }
+
+                    $.each(result.elements,function(posc,item){
+                        if (item.id==idProp){
+                            htmlCode+='<option value="'+item.id+'" selected>'+item.data+'</option>\n';
+                        } else {
+                            htmlCode+='<option value="'+item.id+'">'+item.data+'</option>\n';
+                        }
+                    });
+                    $("#selPropiedad").empty();
+                    $("#selPropiedad").append(htmlCode);
+                    //loadLstConsulta();
+                    $("#selPropiedad").change();
+                } else {
+                    console.log(result.msg);
+                }
+            }
+        });
+
+        $("#selPropiedad").change(function(e){
+            idPropiedad = $(this).val();
+            $.cookie('idPropiedad',idPropiedad);
+        });
+
+    }); // Fin de Document Ready
+
+
+
+</script>
+{% endblock %}

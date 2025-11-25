@@ -1,0 +1,13 @@
+{# José Hernández email: jghernandez053@gmail.com #}
+{{ include('desings/baseDashboard_header.html.twig') }}
+    <div class="right_col" role="main" style="background-color:#fffff;">
+        <div class="row">
+            {% block contentDashboard %}
+            {% endblock %}
+        </div>
+    </div>
+
+{{ include('desings/baseDashboard_footer.html.twig') }}
+
+    {% block javascriptsFooter %}
+    {% endblock %}

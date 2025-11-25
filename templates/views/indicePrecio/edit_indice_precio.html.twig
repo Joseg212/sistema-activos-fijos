@@ -1,0 +1,86 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{% block contentDashboard %}
+
+{{ form_start(form,{'attr':{'role':'form','novalidate':'novalidate','class':'form-inline'}}) }}
+<div class="row ml-2">
+    <div class="col-md-10 af-content-data ventana1">
+        <div class="row x_title">
+            <div class="col-lg-12">
+                    <h3 class="af-title-h3">ÍNDICE PRECIO</h3>
+                    <h4><small>Modificar un factor de corrección para ajustar el costo de activo fijo.</small> </h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 form-group">
+                {{ form_label(form.id_ipc) }}
+                {{ form_widget(form.id_ipc) }}
+                <span class="text-danger">{{ form_errors(form.id_ipc) }}</span>          
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 form-group">
+                {{ form_label(form.anio) }}
+                {{ form_widget(form.anio) }}
+                <span class="text-danger">{{ form_errors(form.anio) }}</span>          
+            </div>
+            <div class="col-md-4 form-group">
+                {{ form_label(form.mes) }}
+                {{ form_widget(form.mes) }}
+                <span class="text-danger">{{ form_errors(form.mes) }}</span>          
+            </div>
+            <div class="col-md-4 form-group">
+                {{ form_label(form.factor) }}
+                {{ form_widget(form.factor) }}
+                <span class="text-danger">{{ form_errors(form.factor) }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 form-group">
+                {{ form_label(form.reconver) }}
+                {{ form_widget(form.reconver) }}
+                <span class="text-danger">{{ form_errors(form.reconver) }}</span>          
+            </div>
+            <div class="col-md-6 form-group">
+                {{ form_label(form.grupo) }}
+                {{ form_widget(form.grupo) }}
+                <span class="text-danger">{{ form_errors(form.grupo) }}</span>          
+            </div>
+        </div>
+        <!-- Botones -->
+        <div class="row mt-4" style="clear:left">
+            <div class="col-md-12">
+                <div class="form-group" style="float:right;clear:right;"> 
+                    {{ form_widget(form.write) }}
+                    <a href="{{path('app_indicePrecio')}}" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+        <!-- Botones -->
+    </div>
+    <div class="col-md-2">
+        <h4 class="_orange">INFORMACION:</h4>
+        <hr class="line_style" />
+        <p class="af-p-12">Ingrese los datos solicitado, para culminar y guardar la informacion hacer clic en el Guardar</p>
+        <h4 class="_orange">RECONVERSIÓN MONETARIA:</h4>
+        <hr class="line_style" />
+        <p class="af-p-12">Solo ingrese el campo reconversión cuando lo amerite, el sistema tomara el valor en aplicación constante, hasta un próximo valor reconversión. El valor de reconversión es tal cual el monto de reconversión aplicado.</p>
+        <h4 class="_orange">FACTOR DE CORRECCIÓN:</h4>
+        <hr class="line_style" />
+        <p> El factor de corrección soporta hasta seis decimales y ocho valores enteros.</p>
+    </div>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+
+    $(document).ready(function(e){
+
+    });
+
+</script>
+{% endblock %}

@@ -1,0 +1,226 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{% block contentDashboard %}
+    <div class="row">
+        <!--Pantalla oculta para seleccionar tipo de opciones-->
+        <div class="msg_sel" id="msg01">
+                <div id="message_sel">
+                    <h4 class="_orange" style="text-align:left"><span class="glyphicon glyphicon-list-alt" style="margin-right:10px;"></span>SELECCION</h4>
+                    <hr class="line_style" />
+                    <p style="text-align:left" class="af-text-win-select" >Se ha seleccionado el siguiente dato:</p>
+                    <label id="msg1"></label>
+                    <label id="msg2"></label>
+                    <p style="text-align:left;" class="af-text-win-select">¿Que desea realizar?
+                    </p>
+                    <a  href="#" id="statusWin" class="btn btn-ttc">
+                        <span class="glyphicon glyphicon-edit" style="margin-right:10px;"></span>Aprobar o Rechazar
+                    </a>
+                    <a  href="#" id="printWin" class="btn btn-ttc">
+                        <span class="glyphicon glyphicon-edit" style="margin-right:10px;"></span>Emitir
+                    </a>
+                    <a  href="#" id="viewWin" class="btn btn-ttc" style="display:none;">
+                        <span class="glyphicon glyphicon-edit" style="margin-right:10px;"></span>Visualizar
+                    </a>
+                    <a href="javascript://salir ;" id="outwin" class="btn btn-ttc">
+                        <span class="glyphicon glyphicon-log-out" style="margin-right:10px;"></span>Salir
+                    </a>
+                </div>
+        </div>
+        <!-- Fin Pantalla oculta para seleccionar tipo de opciones-->
+
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-6 left title_modify">
+                    <h3 class="af-title-h3">APROBAR EL TRASLADO DE UN ACTIVO FIJO</h3>
+                    <h4><small>Apruebe o rechace los traslados que se hayan registrado en el sistema.</small> </h4>
+                </div>
+                <div class="col-lg-6 text-right" style="margin-bottom:12px;" >
+                </div>
+            </div>
+            <hr class="line-style-top-table" />
+            <div class="row ventana1 form-inline">
+                <div class="col-md-4 form-group">
+                    <label for="selEstatus" class="requerid">Estatus:</label>
+                    <select id="selEstatus" class="form-control">
+                        <option value="Todos" >Todos</option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="Aprobado">Aprobado</option>
+                        <option value="Rechazado">Rechazado</option>
+                    </select>
+                </div>
+                <div class="col-md-4 form-group">
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <table id="tblTraslado"  class="table table-striped table-hover text_table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>DESCRIPCION</th>
+                        <th>FECHA TRASLADO</th>
+                        <th>UBICACION ORIGEN</th>
+                        <th>UBICACION DESTINO</th>
+                        <th>RESPONSABLE DESTINO</th>
+                        <th>ESTATUS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <div class="row mb-4">
+                <div class="col-lg-2">
+                </div>
+                <div class="col-lg-8 col-right text-center">
+                        <a  href="{{ path('lst_sel_activos') }}" id="newData" class="btn btn-dark">Crear Traslado</a>
+                        <a  href="{{ path('app_default') }}" class="btn btn-dark">Retornar</a>
+                </div>
+                <div class="col-lg-2"> 
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-2">
+                <h4 class="_orange">FILTRO PROPIEDAD:</h4>
+                <hr class="line_style" />
+                <p class="af-p-12">Deberá seleccionar la propiedad para que pueda actualiza lista desplegable de ubicaciones.</p>
+                <br>
+                <h4 class="_orange">FILTRO UBICACIÓN:</h4>
+                <hr class="line_style" />
+                <p class="af-p-12">Seleccione la ubicación desde la lista desplegable para que se pueda ingresar activos fijos.</p>
+                <br>
+                <h4 class="_orange">LISTADO:</h4>
+                <hr class="line_style" />
+                <p class="af-p-12">Seleccione algun items y haga clic para poder modificarlo, o eliminarlo.</p>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+    var tblTraslado=null;
+    var idCode = "";
+    var estatus="Todos";
+
+    $(document).ready(function(e){
+        //loadLstTraslado();
+
+        $(document).on("click",".tr-select",function(event){
+            //console.log("Seleccionado:" + $(this).attr("id"));
+            idCode = String($(this).attr("id"));
+            var idNombre = "#name_" + String($(this).attr("id"));
+            var Nombre = $(idNombre).val();
+
+            var estatus = String($("#status_" + idCode).val());
+
+
+            var rutaEdit = "{{ path('status_aprob_traslado',{idCode:'invertCode'}) }}";
+
+            var rutaView = "{{ path('view_aprob_traslado',{idCode:'invertCode'}) }}";
+
+            var printView = "{{ path('print_aprob_traslado',{idCode:'invertCode'}) }}";
+
+            rutaEdit = rutaEdit.replace('invertCode',idCode);
+            rutaView = rutaView.replace('invertCode',idCode);
+            printView = printView.replace('invertCode',idCode);
+
+            $("#statusWin").attr("href",rutaEdit);
+            $("#viewWin").attr("href",rutaView);
+            $("#printWin").attr("href",printView);
+
+            /* Solo permite modificar solo si el estatus se encuentra pendiente */
+            if (estatus=='Pendiente')
+            {
+                $("#printWin").css("display","none");
+                $("#viewWin").css("display","none");
+                $("#statusWin").css("display","inline-block");
+            } else {
+                $("#printWin").css("display","inline-block");
+                $("#viewWin").css("display","inline-block");
+                $("#statusWin").css("display","none");
+            }            
+
+            $("#msg1").empty();
+            $("#msg2").empty();
+            $("#msg1").html("<b>Id:</b>"+idCode);
+            $("#msg2").html("<b>Descrip:</b>"+Nombre);
+
+            $("#msg01").fadeIn('slow',function(e){
+                $("#msg01").css("display","inherit");
+            });
+        });
+
+        $("#outwin").click(function(e){
+            e.preventDefault();
+            $("#msg01").fadeOut('slow',function(e){
+                $("#msg01").css("display","none");
+            })
+        });
+
+        $("#SearchData").click(function(e){
+            e.preventDefault();
+            console.log("Hizo clic");
+            loadLstTraslado();
+        })
+
+        $("#selEstatus").change(function(e){
+            estatus = $(this).val();
+
+            //$.cookie('estatus',estatus);
+
+            loadLstTraslado();
+        });
+
+
+        loadLstTraslado();
+
+    }); // Fin de Document Ready
+
+    function loadLstTraslado(){
+        var rootAjaxList = "{{ path('ajax_lstTraslado') }}";
+
+        tblTraslado = $('#tblTraslado').dataTable({
+                destroy:true,
+                serverSide: true,
+                searching: true,
+                lengthChange: false,
+                pageLength:35,
+                language:{
+                    info:"Mostrando  _END_/_TOTAL_ ",
+                    infoEmpty:"No se tiene datos", 
+                    paginate:{
+                        first:"Primero",
+                        previous:"Previo",
+                        next:"Próximo",
+                        last:"Último"
+                    }
+                },
+                dom: '<"btnSearch">Pfrtip',
+                ajax:{
+                    data:{'estatus':estatus},
+                    method:"POST",
+                    dataType:"JSON",
+                    url:rootAjaxList,
+                    error: function(err,txt,thr){
+                        $("body").empty();
+                        $("body").html(err.responseText);
+                    }
+                },
+                columns:[
+                    {data:"id"},
+                    {data:"descrip"},
+                    {data:"fechat"},
+                    {data:"ubic_ori"},
+                    {data:"ubic_dest"},
+                    {data:"resp_dest"},
+                    {data:"estatus"},
+
+                ],
+                deferRender: true
+        });
+        $("div.btnSearch").html('<button type="button" class="btn btn-dark" id="SearchData"><i class="fa fa-search"></i></button>');	            
+    }
+</script>
+{% endblock %}

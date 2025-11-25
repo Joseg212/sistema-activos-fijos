@@ -1,0 +1,503 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{% block contentDashboard %}
+<div class="row ml-2">
+    <div class="modal-sel-win" id="selectResp">
+        <div class="box-sel-win"> 
+            <div class="row x-title">
+                <h5 class="af-title-h5 text-center">Seleccionar Responsable</h5>
+                <div class="col-md-12">
+                    <table id="tblSelResp"  class="table table-striped table-hover text_table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NOMBRES</th>
+                                <th>APELLIDOS</th>
+                                <th>CARGO</th>
+                                <th>TELEFONO</th>
+                                <th>MOVIL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12 text-center">
+                    <a href="#" id="exitWin" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10 af-content-data ventana1 form-inline">
+        <div class="row x_title">
+            <div class="col-lg-12">
+                <h3 class="af-title-h3">VISUALIZAR EL TRASLADO</h3>
+                <h4><small>En el modo de consulta no se puede modificar ningún dato.</small> </h4>
+            </div>
+        </div>
+        <!--Informacion -->
+        <div class="row box-af-style1">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <p><b>Activo Fijo:</b>{{ datosAF.descrip}}</p>
+                </div>
+                <div class="col-md-6 form-group">
+                    <p><b>Fecha de Compra:</b>{{ datosAF.fechac }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <p><b>Número de Serie:</b> {{ datosAF.num_serie }}</p>
+                </div>
+                <div class="col-md-6 form-group">
+                    <p><b>Estado del Activo:</b> {{ datosAF.edofisico }} </p>
+                </div>
+            </div>
+        </div>
+        <!-- Datos -->
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center">IDENTIFIQUE EL TIPO DE MOVIMIENTO DEL ACTIVO FIJO</h5>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label for="form_tipo_traslado">Tipo Traslado:</label>
+                    <input id="form_tipo_traslado" type="text" class="form-control" autocomplete="off" value="{{ datTraslado.tipoDes }}" disabled/>
+                </div>
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+        <!-- Informacion del traslado -->
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center">DATOS INFORMATIVOS DEL TRASLADO</h5>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label for="form_id_af">Id Activo Fijo:</label>
+                    <input id="form_id_af" type="text" disabled class="form-control" autocomplete="off" value="{{ datTraslado.id_af }}" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="form_fecha_traslado">Fecha a ejecutar Traslado:</label>
+                    <input id="form_fecha_traslado" type="text" disabled class="form-control" autocomplete="off" value="{{ datTraslado.fecha_traslado }}" style="flex:0;width:100px" />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="form_id_traslado">Id Traslado:</label>
+                    <input id="form_id_traslado" type="text" disabled class="form-control" autocomplete="off" value="{{ datTraslado.id_traslado }}" />
+                </div>
+            </div>
+        </div>
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center">DATOS DEL EMISOR</h5>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label for="PropOrig">Propiedad Origen:</label>
+                    <input type="text" disabled id="PropOrig" class="form-control af-data-strech" placeholder="..." autocomplete="off" value="{{ datosAF.idProp }}" />
+                    <input type="text" disabled id="PropName" class="form-control" placeholder="..." autocomplete="off" value="{{ datosAF.propiedad }}" />
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="form_id_ubic_orig">Ubicación Origen:</label>
+                    <input type="text" disabled id="form_id_ubic_orig" class="form-control  af-data-strech" autocomplete="off" value="{{ datTraslado.id_ubic_orig }}" />
+                    <input type="text" disabled id="UbicName" class="form-control" placeholder="..." autocomplete="off" value="{{ datosAF.ubicacion }}" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label for="form_id_resp_emisor">Responsable Emisor:</label>
+                    <input type="text" disabled id="form_id_resp_emisor" class="form-control  af-data-strech" autocomplete="off" value="{{datTraslado.id_resp_emisor}}" />
+                    <input type="text" placeholder="..." id="nameRespOrig" disabled class="form-control" value="{{ dataOther.nombreRespEmisor}}" autocomplete="off" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="dat01Orig">Cargo:</label>
+                    <input type="text" id="dat01Orig" placeholder="..." disabled class="form-control" autocomplete="off" value="{{ dataOther.cargoRespEmisor }}" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="dat02Orig">Teléfono:</label>
+                    <input type="text" id="dat02Orig" placeholder="..." disabled class="form-control" autocomplete="off" value="{{ dataOther.telfRespEmisor }}" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="dat03Orig">Móvil:</label>
+                    <input type="text" id="dat03Orig" placeholder="..." disabled class="form-control" autocomplete="off" value="{{ dataOther.movilRespEmisor }}" />
+                </div>
+            </div>
+        </div>
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center">DATOS DEL RECEPTOR</h5>
+            <div class="row" id="ubicInterna">
+                <div class="col-md-6 form-group">
+                    <label for="PropDest">Propiedad Destino:</label>
+                    <input type="text" disabled id="PropDest" class="form-control af-data-strech" placeholder="..." autocomplete="off" value="{{ dataOther.idPropDestino }}" />
+                    <select id="selPropDest" class="form-control" autocomplete="off" value="{{ dataOther.idPropDestino }}" disabled/>
+                        <option value="select">Seleccione...</option>
+                    </select>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="form_id_ubic_dest">Ubicación Destino:</label>
+                    <input type="text" disabled id="form_id_ubic_dest" class="form-control  af-data-strech" autocomplete="off" value="{{ datTraslado.id_ubic_dest }}" />
+                    <select id="selUbicDest" disabled class="form-control" autocomplete="off" value="{{ dataOther.idUbicDest }}"/>
+                        <option value="select">Seleccione...</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label for="form_id_resp_destino">Responsable Destino:</label>
+                    <input type="text" disabled id="form_id_resp_destino" class="form-control  af-data-strech" autocomplete="off" value="{{datTraslado.id_resp_destino}}" />
+                    <input type="text" placeholder="..." id="nameRespDest" disabled class="form-control" value="{{ dataOther.nombreRespDestino }}" autocomplete="off" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="dat01Dest">Cargo:</label>
+                    <input type="text" id="dat01Dest" placeholder="..." disabled class="form-control" autocomplete="off" value="{{ dataOther.cargoRespDestino }}" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="dat02Dest">Teléfono:</label>
+                    <input type="text" id="dat02Dest" placeholder="..." disabled class="form-control" autocomplete="off" value="{{ dataOther.telfRespDestino }}" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="dat03Dest">Móvil:</label>
+                    <input type="text" id="dat03Dest" placeholder="..." disabled class="form-control" autocomplete="off" value="{{ dataOther.movilRespDestino }}" />
+                </div>
+            </div>
+            <div class="row" id="ubicExterna" style="visibility:hidden">
+                <div class="col-md-12 form-group">
+                    <label for="form_destino_externo_ubic">Datos Ubicación Externa:</label>
+                    <textarea disabled id="form_destino_externo_ubic" class="form-control" autocomplete="off">{{ datTraslado.destino_externo_ubic }}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label for="form_destino_externo_info">Información Adicional:</label>
+                    <textarea disabled id="form_destino_externo_info" class="form-control" autocomplete="off">{{ datTraslado.destino_externo_info }}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row box-af-style1">
+            <h5 class="af-title-h5 text-center">OTROS DATOS PARA EL TRASLADO DEL ACTIVO</h5>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label for="form_motivo">El motivo por el cual desea trasladar el activo a otra ubicación:</label>
+                    <textarea disabled id="form_motivo" class="form-control" autocomplete="off">{{ datTraslado.motivo }}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="form_estatus">Estado final del traslado:</label>
+                    <input type="text" disabled id="estatus" class="form-control" autocomplete="off" value="{{ datTraslado.estatus }}" />
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label for="form_observ">Nota escrita por el administrado referente al traslado:</label>
+                    <textarea disabled id="form_observ" class="form-control" autocomplete="off">{{ datTraslado.observ }}</textarea>
+                </div>
+            </div>
+        </div>
+        <!-- Botones -->
+        <div class="row mt-4" style="clear:left">
+            <div class="col-md-12">
+                <div class="form-group" style="float:right;clear:right;"> 
+                    <a href="{{path('app_aprob_traslado')}}" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+        <!-- Botones -->
+    </div>
+    <div class="col-md-2">
+        <h4 class="_orange">INFORMACION:</h4>
+        <hr class="line_style" />
+        <p class="af-p-12">Ingrese los datos solicitado, para culminar y guardar la información hacer clic en el Guardar</p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+    var tipoRespSel = 0;
+    $(document).ready(function(e){
+        // Resposable Origen
+        $("#idSearchRespOrig").click(function(event){
+            event.preventDefault();
+            loadLstSelResp();
+
+            tipoRespSel = 1;
+
+            $("#selectResp").fadeIn("slow",function(e){
+                $("#selectResp").css("display","inherit");
+            });
+
+        });
+        // Responsable Destino
+        $("#idSearchRespDest").click(function(event){
+            event.preventDefault();
+            loadLstSelResp();
+
+            tipoRespSel = 2;
+
+            $("#selectResp").fadeIn("slow",function(e){
+                $("#selectResp").css("display","inherit");
+            });
+
+        });
+        // Salir de la ventana de Seleccion 
+        $("#exitWin").click(function(event){
+            event.preventDefault();
+            tipoRespSel = 0;
+            $("#selectResp").fadeOut("slow",function(e){
+                $("#selectResp").css("display","none");
+            });
+        });
+        // Seleccion de Responsable 
+        $(document).on("click",".tr-select",function(event){
+            //console.log("Seleccionado:" + $(this).attr("id"));
+            idCode = String($(this).attr("id"));
+            var idNombre = "#name_" + String($(this).attr("id"));
+            var Nombre = $(idNombre).val();
+
+            var OtroDatos = String($("#cadena_"+idCode).val());
+            var arrOtroDatos = OtroDatos.split('/');
+
+
+            if (tipoRespSel==1){
+                $("#traslado_id_resp_emisor").val(idCode);
+                $("#nameRespOrig").val(Nombre);
+
+                $("#dat01Orig").val(arrOtroDatos[0]);
+                $("#dat02Orig").val(arrOtroDatos[1]);
+                $("#dat03Orig").val(arrOtroDatos[2]);
+            } 
+            if (tipoRespSel==2){
+                $("#traslado_id_resp_destino").val(idCode);
+                $("#nameRespDest").val(Nombre);
+
+                $("#dat01Dest").val(arrOtroDatos[0]);
+                $("#dat02Dest").val(arrOtroDatos[1]);
+                $("#dat03Dest").val(arrOtroDatos[2]);
+            }
+            $("#selectResp").fadeOut("slow",function(e){
+                $("#selectResp").css("display","none");
+            });
+
+        });
+
+        $("#traslado_tipo_traslado").change(function(e){
+            var tipoTraslado = String($(this).val());
+            if (tipoTraslado=='05')
+            {
+                $("#selUbicDest").attr("readonly",true);
+                $("#ubicInterna").css("visibility","hidden");
+                $("#ubicExterna").css("visibility","visible");
+            } else {
+                $("#selUbicDest").removeAttr("readonly");
+                $("#ubicInterna").css("visibility","visible");
+                $("#ubicExterna").css("visibility","hidden");
+                $("#traslado_destino_externo_ubic").text(" ");
+            }
+            switch (tipoTraslado)
+            {
+                case '01':
+                    $("#selPropDest").attr("disabled",true);
+                    break;
+                case '02':
+                    $("#selPropDest").removeAttr("disabled");
+                    break;
+                case '03':
+                    $("#selPropDest").attr("disabled",true);
+                    break;
+                case '04':
+                    $("#selPropDest").removeAttr("disabled");
+                    break;
+                case '05':
+                    $("#selPropDest").attr("disabled",true);
+                    break;
+            }
+        });
+
+        var rootSelProp="{{ path('ajax_sel_prop') }}";
+
+        $.ajax({
+            data:{},
+            method:'post',
+            dataType:'json',
+            url:rootSelProp,
+            error:function(err,txt,thr){
+                $('body').empty();
+                $('body').html(err.responseText);
+            },
+            success:function(result){
+                if (result.ok=='01'){
+                    var idProp = $("#PropDest").val();
+                    /*  Verificar la Cookies */
+                    var htmlCode = '';
+                    $.each(result.elements,function(posc,item){
+                        if (idProp==item.id){
+                            htmlCode+='<option value="'+item.id+'" selected>'+item.data+'</option>\n';
+                        } else {
+                            htmlCode+='<option value="'+item.id+'">'+item.data+'</option>\n';
+                        }
+                    });
+                    $("#selPropDest").empty();
+                    $("#selPropDest").append(htmlCode);
+                    //loadLstActivoFijo();
+                    $("#selPropDest").change();
+                } else {
+                    console.log(result.msg);
+                }
+            }
+        });
+
+        $("#selPropDest").change(function(e){
+            idPropiedad = $(this).val();
+            $("#PropDest").val(idPropiedad);
+
+            selectUbicacion(idPropiedad);
+
+        });
+
+        $("#selUbicDest").change(function(e){
+            idUbicacion = $(this).val();
+
+            $("#traslado_id_ubic_dest").val(idUbicacion);
+            
+        });
+
+        var tipoTras = String($("#traslado_tipo_traslado").val());
+        if (tipoTras=='05')
+        {
+            $("#selUbicDest").attr("readonly",true);
+            $("#ubicInterna").css("visibility","hidden");
+            $("#ubicExterna").css("visibility","visible");
+        } else {
+            $("#selUbicDest").removeAttr("readonly");
+            $("#ubicInterna").css("visibility","visible");
+            $("#ubicExterna").css("visibility","hidden");
+        }
+        switch (tipoTras)
+        {
+            case '01':
+                $("#selPropDest").attr("disabled",true);
+                break;
+            case '02':
+                $("#selPropDest").removeAttr("disabled");
+                break;
+            case '03':
+                $("#selPropDest").attr("disabled",true);
+                break;
+            case '04':
+                $("#selPropDest").removeAttr("disabled");
+                break;
+            case '05':
+                $("#selPropDest").attr("disabled",true);
+                break;
+        }
+
+
+    }); // Fin Document Ready 
+
+    // Carga la seleccion de la ubicacion 
+    function selectUbicacion(idProp){
+        var rootSelUbic="{{ path('ajax_sel_ubic') }}";
+
+        $.ajax({
+            data:{'idProp':idProp},
+            method:'post',
+            dataType:'json',
+            url:rootSelUbic,
+            error:function(err,txt,thr){
+                $('body').empty();
+                $('body').html(err.responseText);
+            },
+            success:function(result){
+                if (result.ok=='01'){
+                    var idUbic = $("#traslado_id_ubic_orig").val();
+                    /*  Verificar la Cookies */
+                    var htmlCode = '';
+                    var firstIdUbic = "{{dataOther.idUbicDest }}";
+                    $.each(result.elements,function(posc,item){
+                        if (idUbic==item.id || item.id=="select"){
+                            // se anula el dato
+                            //htmlCode+='<option value="'+item.id+'" selected>'+item.data+'</option>\n';
+                        } else {
+                            if (firstIdUbic==item.id)
+                            {
+                                htmlCode+='<option value="'+item.id+'" selected >'+item.data+'</option>\n';
+                            } else {
+                                htmlCode+='<option value="'+item.id+'">'+item.data+'</option>\n';
+                            }
+                        }
+                    });
+                    $("#selUbicDest").empty();
+                    $("#selUbicDest").append(htmlCode);
+                    //loadLstActivoFijo();
+                    $("#selUbicDest").change();
+                } else {
+                    console.log(result.msg);
+                }
+            }
+        });
+
+    }
+
+
+    // La lista de seleccion de responsable
+    function loadLstSelResp(){
+        console.log("Carga la lista...");
+
+        var rootAjaxList = "{{ path('ajax_lstResponsable') }}";
+
+        tblSelResp = $('#tblSelResp').dataTable({
+                destroy:true,
+                serverSide: true,
+                searching: true,
+                lengthChange: false,
+                pageLength:8,
+                language:{
+                    info:"Mostrando  _END_/_TOTAL_ ",
+                    infoEmpty:"Mostrando  1 de 0 ", 
+                    paginate:{
+                        first:"Primero",
+                        previous:"Previo",
+                        next:"Próximo",
+                        last:"Último"
+                    }
+                },
+                dom: '<"btnSearch">Pfrtip',
+                ajax:{
+                    method:"POST",
+                    dataType:"JSON",
+                    url:rootAjaxList,
+                    error: function(err,txt,thr){
+                        $("body").empty();
+                        $("body").html(err.responseText);
+                    }
+                },
+                columns:[
+                    {data:"id"},
+                    {data:"nombre"},
+                    {data:"apellido"},
+                    {data:"cargo"},
+                    {data:"telefono"},
+                    {data:"movil"},
+                ],
+                deferRender: true
+        });
+
+        $("div.btnSearch").html('<button type="button" class="btn btn-dark" id="SearchData"><i class="fa fa-search"></i></button>');	            
+    }
+
+
+</script>
+<style> 
+    @media (min-width:576px)  {
+        .form-inline .form-control {
+            width: none !important;
+        }
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,461 @@
+.bar-up-01 {
+	background-image: url("/web/public/img/softmod_init/banda01.png");
+	background-size: 100% 100% ;
+	background-repeat: no-repeat;
+	height: 148px;
+}
+.sm-logo-bar {
+	width: 15rem;
+	display: block;
+	float:right;
+	clear:right;
+	vertical-align: top;
+}
+
+/*.sm-logo-bar img {
+	width:100%;
+	margin-top: 2.34rem;
+}*/	
+
+.sm-buttom-menu {
+    width: 4.5rem;
+    height: 4.5rem;
+    display: block;
+    float: left;
+    clear: left;
+    vertical-align: top;
+    background-image: url("/web/public/img/softmod_init/sm-buttom-menu-hover.png");
+    background-image: url("/web/public/img/softmod_init/sm-buttom-menu.png");
+    background-size: 4.5rem 4.5rem;
+    background-repeat: no-repeat;
+    margin-left: 1rem;
+    margin-top: 2.55rem;
+    cursor:pointer;
+}
+
+.sm-buttom-menu:hover {
+    background-image: url("/web/public/img/softmod_init/sm-buttom-menu-hover.png");
+}
+
+
+.sm-exit-app {
+    display: block;
+    width: 2.6rem;
+    height: 2.6rem;
+    position: absolute;
+    background-image: url("/web/public/img/softmod_init/sm-exit-app-hover.png");
+    background-image: url("/web/public/img/softmod_init/sm-exit-app-normal.png");
+    background-repeat: no-repeat;
+    background-size: 2.6rem 2.6rem;
+    margin-left: 76%;
+    margin-top: 11%;
+    cursor:pointer;
+}
+.sm-exit-app:hover {
+    background-image: url("/web/public/img/softmod_init/sm-exit-app-hover.png");
+}
+.bar-middle-02 {
+	background-repeat: repeat-y;
+	background-size: 100% 267px;
+	width: 100%;
+}
+.sm-banda-module01 {
+	clear:left;
+	clear:right;
+	display: inherit;
+	height: 3rem;
+	width: 100%;
+}
+.sm-banda-module01 .sm-title-module01 {
+	float:left;
+	clear:left;
+	color:#2E6583;
+	background-color: #ffffff;
+	width:20%;
+	text-align: center;
+	line-height: 3rem;
+	text-shadow: 0px 0px 1px #E0E0E0;
+}
+.sm-banda-module01 .sm-title-module02 {
+	float:right;
+	clear:right;
+	color:#282828;
+	background-color: rgba(255,255,255,0.4);
+	width:80%;
+	text-align: center;
+	vertical-align: top;
+	line-height: 3rem;
+	text-shadow: 0px 0px 1px #E0E0E0;
+}
+.sm-icon-module-01 {
+	width: 100%;
+	background-color: #ffffff;
+	/*margin-top: 3rem;*/
+	padding: 1rem 1rem 1rem 1rem;
+}
+
+.icon-programs {
+	height: 3.3rem;
+}
+
+.select-program-off {
+    background-image: url("/web/public/img/softmod_init/select-mod-nocheck-hover.png");
+    background-image: url("/web/public/img/softmod_init/select-mod-nocheck.png");
+    background-size: 2.2rem 2.2rem;
+    background-repeat: no-repeat;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: block;
+    position: absolute;
+    margin-left: 10rem;
+    margin-top: -1rem;
+	cursor:pointer;
+}
+.select-program-off:hover{
+    background-image: url("/web/public/img/softmod_init/select-mod-nocheck-hover.png");
+    -webkit-transition: width 0.5s; /* Safari prior 6.1 */
+	transition: width 0.5s;
+}
+
+.program-active {
+    background-image: url("/web/public/img/softmod_init/select-mod-check.png");
+    background-size: 2.2rem 2.2rem;
+    background-repeat: no-repeat;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: block;
+    position: absolute;
+    margin-left: 10rem;
+    margin-top: -1rem;
+	cursor:pointer	    
+}
+
+.program-active:hover {
+    background-image: url("/web/public/img/softmod_init/select-mod-check.png");
+    background-image: url("/web/public/img/softmod_init/select-mod-check-hover.png");
+    -webkit-transition: width 0.5s; /* Safari prior 6.1 */
+	transition: width 0.5s;
+}
+
+.new-width {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+.sm-icon-leyend { 
+	font-size: 0.8rem;
+	margin-top: 0.5rem;
+	text-shadow: 0px 0px 1px #000000;
+	margin-bottom: 2rem;
+}
+.sm-icon-printer-off {
+	width:95%;
+}
+
+.sm-link-printer {
+	font-size: 1.1rem;
+	text-align: left;
+	color:#FFFFFF;
+	text-shadow: 0px 0px 1px #E0E0E0;
+	display: block;
+	width:80%;
+	margin-left: 2rem;
+	-webkit-transition: 0.5s ease-out;
+	-moz-transition: 0.5s ease-out;
+	-o-transition:  0.5s ease-out;
+	transition:  0.5s ease-out;
+ }
+.sm-link-printer:hover {
+	color:#C6E9F7;
+	-webkit-transition: 0.5s ease-out;
+	-moz-transition: 0.5s ease-out;
+	-o-transition:  0.5s ease-out;
+	transition:  0.5s ease-out;
+}
+.sm-bound-01 {
+	background: #eae3f1; /* Old browsers */
+	background: -moz-linear-gradient(left,  #eae3f1 0%, #ffffff 25%, #ffffff 75%, #eae3f1 100%); 
+	background: -webkit-linear-gradient(left,  #eae3f1 0%,#ffffff 25%,#ffffff 75%,#eae3f1 100%); 
+	background: linear-gradient(to right,  #eae3f1 0%,#ffffff 25%,#ffffff 75%,#eae3f1 100%); 
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eae3f1', endColorstr='#eae3f1',GradientType=1 ); 
+}
+.sm-name-company {
+    font-weight: 700;
+    text-shadow: 1px 1px 3px #a39196;
+    font-size: 1.3rem;
+}
+.sm-title-company {
+	background-color: #4C3C88;
+	color:#D6CBE4;
+	text-shadow: 0px 0px 1px #D6CBE4;
+	line-height: 2.8rem;
+	margin-bottom:0px;
+}
+.sm-widget-notdynamic {
+	 background-image: url("/web/public/img/softmod_init/sm-widget-notdynamic-01.png");
+	 background-size: 100% 312px;
+	 background-repeat: no-repeat;
+	 height: 312px;
+	 border:solid 1rem #E0E0E0;
+	 border-radius: 5rem 5rem;
+
+}
+
+
+@media screen and (max-width:1024px) and (min-width:640px) {
+	.bar-up-01 {
+		background-image: url("/web/public/img/softmod_init/banda02.png");
+		background-size: 100% 100% ;
+		background-repeat: no-repeat;
+		height: 117px;
+	}
+	.sm-icon-printer-off {
+		margin-top: 2.2rem;
+	}
+	.sm-link-printer {
+		margin-left: 1.1rem;
+		font-size: 0.90rem;
+	}
+	.select-program-off {
+		margin-left: 9rem;	
+		background-size: 1.6rem 1.6rem;
+		width:1.6rem;
+		width:1.6rem;
+	}
+	.program-active {
+		margin-left: 9rem;	
+		background-size: 1.6rem 1.6rem;
+		width:1.6rem;
+		width:1.6rem;
+	}
+	.sm-title-company {
+		line-height: 2.2rem;
+	}
+
+}
+/*  Ventana de Menu */
+.sm-menu-windows {
+	display:block;
+	position: fixed;
+	top:0px;
+	left:0px;
+	background-color: rgba(0,0,0,0.70);
+	z-index:1000;
+}
+.sm-menu-container {
+	width:85%;
+	background-color: white;
+	padding: 0.7rem 0.7rem 0.7rem 0.7rem;
+	margin: auto;
+	margin-top: 6%;
+	border-radius: 2rem 2rem;
+
+}
+.sm-menu-panel {
+	background-color: #bad5e8;
+	border: solid #94bdda 0.15rem;
+	border-radius: 2rem 2rem;
+	padding: 1rem 0rem 1rem 0rem;
+}
+.sm-title-window-menu {
+	text-align: center;
+	color:#296786;
+	text-shadow: 0px 0px 1px #296786;
+	margin-bottom: 0px;
+	padding-bottom: 0rem;
+}
+.sm-title-category {
+    color: #4e565b;
+    text-shadow: 0px 0px 1px #4e565b;
+    border: solid 1px #94bdda;
+    padding: 0.5rem 0.5rem;
+    margin-left: 0px;
+    margin-bottom: 0px;
+}
+.sm-ul-menu-window {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0px;
+    border-top:solid 1px #94bdda;
+    border-left:solid 1px #94bdda;
+    border-right:solid 1px #94bdda;
+}
+.sm-ul-menu-window a {
+    display: block;
+    margin-top: 0px;
+    height: 100%;
+    color: #393f43;
+    text-decoration: none;
+}
+.sm-ul-menu-window a:hover {
+	color:#3380a7;	
+}
+
+.sm-menu-btn-close {
+    background-image: url("/web/public/icon/close-window-hover02.png");
+    background-image: url("/web/public/icon/close-window-02.png");
+    background-size: 1.4rem 1.4rem;
+    background-repeat: no-repeat;
+    background-position: 10% 0.1rem;
+    height: 1.5rem;
+    z-index: 100;
+    display: block;
+    float: right;
+    clear: right;
+    width: 4%;
+    vertical-align: top;
+    text-align: center;
+    cursor: pointer;
+}
+.sm-menu-btn-close:hover {
+    background-image: url("/web/public/icon/close-window-hover02.png");
+}
+
+/* Radio button personalizado */
+.sm-radio-button {
+	padding-left: 1.9rem;
+	/*background: url('../../public/icon/radio-nocheck.png') no-repeat top left;
+	background-size: 1.6rem 1.6rem;*/
+	line-height: 1.6rem;
+	display: inline-block;
+	cursor:pointer;	
+}
+
+.sm-radio-input {
+    display: none;
+ }
+
+/*input[type=radio] + label:before   {
+	background: url('../../public/icon/radio-check.png') no-repeat top left;
+	background-size: 1.6rem 1.6rem;
+}
+input[type=radio]:checked  + label:before  {
+	background: url('../../public/icon/radio-nocheck.png') no-repeat top left;
+	background-size: 1.6rem 1.6rem;
+}*/
+.sm-radio-input + label   {
+	background: url('../../public/icon/radio-nocheck.png') no-repeat top left;
+	background-size: 1.6rem 1.6rem;
+}
+.sm-radio-input:checked  + label  {
+	background: url('../../public/icon/radio-check.png') no-repeat top left;
+	background-size: 1.6rem 1.6rem;
+}
+
+.sm-box-details {
+    background-color: #d5dde6;
+    color: #4d545b;
+    border-radius: 1rem 1rem;
+    margin-top: 0.5rem;
+}
+.sm-title-count {
+    font-size: 0.9rem !important;
+    font-weight: 700;
+}
+/* The switch - the box around the slider */
+.sm-switch {
+  position: relative;
+  float:right;
+  clear:right;
+  width: 32px;
+  height: 23px;
+  color:#000 !important;
+  margin-bottom:0px;
+}
+
+/* Hide default HTML checkbox */
+.sm-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.sm-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-top-color: #17a2b8;
+  border-right-color: #17a2b8;
+  border-bottom-color: #17a2b8;
+  border-left-color: #17a2b8;
+  box-shadow: inset 0px 0px 0px 0px #17a2b8;
+  transition-property: border, box-shadow;
+  transition-duration: 0.4s, 0.4s;
+  transition-timing-function: ease, ease;
+  transition-delay: 0s, 0s;
+  background-color: #C6E9F7;
+
+}
+
+
+.sm-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 0px;
+  top:0px;
+  bottom: 0px;
+  /*border: solid 0px #fefefe*/
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  box-shadow: -1px 1px 2px;
+}
+
+
+
+.sm-switch input:checked + .slider {
+  background-color: #d7e0e1;
+  border-top-color: #000;
+  border-right-color: #000;
+  border-left-color: #000;
+  border-bottom-color: #000;
+  box-shadow: inset 0px 0px 0px 16px #d7e0e1;
+
+}
+
+.sm-switch input:focus + .slider {
+  box-shadow: 0 0 1px #d7e0e1;
+}
+
+.sm-switch input:checked + .slider:before {
+  -webkit-transform: translateX(10px);
+  -ms-transform: translateX(10px);
+  transform: translateX(10px);
+}
+
+/* Rounded sliders */
+.sm-switch  .slider.round {
+  border-radius: 16px;
+  border-width: 1px;
+  border-style: solid;
+  background-color: #275266;
+}
+
+.sm-switch .slider.round:before {
+  border-radius: 50%;
+}
+
+/* Estilo Caption en parrafos */
+.sm-caption-type-1 {
+    width: 80%;
+    float: left;
+    clear: left;
+    line-height: 2rem;
+    font-size: 1.3rem;
+    margin-bottom: 0px;
+}
+
+
+/* Numero a la izquierda */
+.sm-number-right {
+  text-align: right;
+}

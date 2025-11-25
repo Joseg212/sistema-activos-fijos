@@ -1,0 +1,162 @@
+
+.table tr td {
+	font-size: 0.87rem;
+}
+
+.table tr th {
+	font-size: 0.9rem;
+}
+
+
+
+@media screen and (max-width:1440px) and (min-width: 1279px) {
+	#barra-menu {
+		width: 84%;
+	}
+}
+
+@media screen and (max-width:1439px){
+  /* reglas CSS */
+  .banda-active {
+  	display: none;
+  }
+  .banda-stresh {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 1%;
+    flex: 1%;
+    max-width: 100%;
+  }
+
+  .softmod-header .col-lg-10 {
+  	min-width: 100% ;
+  	width:100% ;
+  }
+  .banda-width01 {
+  	min-width: 100% ;
+  	width:100% ;
+  }
+}
+@media screen and (max-width:1024px) and (min-width:640px) {
+    
+    .table tr td {
+    	font-size: 0.7rem;
+    }
+
+    .table tr th {
+    	font-size: 0.73rem;
+    }
+
+	label {
+		font-size: 0.85rem;
+
+	}
+
+	input {
+		font-size: 0.85rem !important;
+
+	}
+	select {
+   	   font-size: 0.85rem !important;
+   	   height: 1.9rem !important;
+   	   padding-left: 0.3rem;
+	}
+
+	button {
+		font-size: 0.80rem;
+
+	}
+
+	a {
+		font-size: 0.75rem;
+	}
+
+	h6 {
+		font-size: 0.82rem;
+	}
+
+	h5 {
+		font-size: 0.90rem;
+	}
+
+	h4 {
+		font-size: 1.1rem;
+	}
+
+	p {
+		font-size: 0.75rem;
+	}
+	.btn-sm-type01 {
+		font-size: 0.75rem;
+	}
+
+	.banda-stresh {
+	   -webkit-box-flex: 0;
+	   -ms-flex: 0 0 1%;
+	   flex: 1%;
+	   max-width: 100%;
+	}
+	.bar-header .imagen-bar-header {
+		width: 6rem ;
+		height: 6rem;
+		margin-top: -3rem;
+	}
+	.bar-header .imagen-bar-header img {
+		width: 5.8rem;
+		height: 5.8rem;
+	}
+	#barra-menu {
+		width: 80%;
+	}
+
+	.sm-imagen-bar {
+		width: 4.8rem; 
+		height: 4.8rem;
+		margin-top: 1.3rem;
+	}
+	.sm-imagen-bar img {
+		width: 4.7rem;
+		height: 4.7rem;
+	}
+
+	.sm-buttom-menu {
+		width:3.5rem !important;
+		background-size: 3.5rem 3.2rem !important;
+		margin-top:2.1rem !important;
+		margin-left:0.4rem !important;
+	}
+
+
+	.sm-texto-info01 {
+		width: 10rem;
+		margin-left: 0.5rem;
+		margin-top:1.6rem;
+	}
+	.sm-texto-info01 h5 {
+	    font-size: 0.9rem;
+	}
+	.sm-texto-info01 h6 {
+	    font-size: 0.8rem;
+	}
+	.sm-menu-btn-close {
+		background-size: 1.1rem 1.1rem !important;
+		background-position: 10% 0rem !important;
+ 
+	}
+
+	.btn .sm-box-message .btn-search-t	{
+		font-size: 0.8rem;
+		line-height: 1.5rem;
+	}
+	#searchBtn {
+		background-size: 20%;
+		background-position-y:0.6rem; 
+		background-position-x:2rem; 
+
+	}
+
+  /* reglas CSS */
+}
+@media screen and (min-width:640px) {
+  /* reglas CSS */
+
+}

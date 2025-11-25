@@ -1,0 +1,46 @@
+{# templates/login/index.html.twig #}
+{% extends 'desings/baseLogin.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+
+{% block contentLogin %}
+   <form action="{{ path('app_login') }}" method="post">
+      <h1>Inicio de Sessión</h1>
+      <div>
+        <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}" placeholder="Su Correo"/>
+      </div>
+      <div>
+        <input type="password" id="password" name="_password" required="" class="form-control" placeholder="Contraseña" />
+      </div>
+      <div>
+        <button class="btn btn-default button_login_user" href="index.html" type="submit" >Ingresar</button>
+        <!--<a class="reset_pass" href="#">Lost your password?</a>-->
+      </div>
+
+      <div class="clearfix"></div>
+
+      <div class="separator">
+        <!-- <p class="change_link">New to site?
+          <a href="#signup" class="to_register"> Create Account </a>
+        </p>-->
+
+        <div class="clearfix"></div>
+        <br />
+
+        <div>
+          <h1 style="margin-bottom:0.7rem;"> AdmActif V-1.0 </h1>
+          <div class="img-logo-af">
+            <img src="{{ asset('img/LogoSistema01.png') }}" alt="" />
+          </div>
+          <p>©2022 Todos los derechos reservados.</p>
+          </br>
+          {% if error %}
+            <div><p class="message_error_user"> {{ error.messageKey|trans(error.messageData, 'security') }}</p></div>
+          {% endif %}
+
+        </div>
+       </div>
+        {# If you want to control the URL the user is redirected to on success
+        <input type="hidden" name="_target_path" value="/account"/> #}
+    </form>
+
+{% endblock %}

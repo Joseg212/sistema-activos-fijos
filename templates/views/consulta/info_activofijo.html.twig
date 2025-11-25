@@ -1,0 +1,243 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{% block contentDashboard %}
+<div class="row ml-2">
+    <div class="modal-sel-win" id="selectResp">
+        <div class="box-sel-win"> 
+            <div class="row x-title">
+                <h5 class="af-title-h5 text-center">Seleccionar Responsable</h5>
+                <div class="col-md-12">
+                    <table id="tblSelResp"  class="table table-striped table-hover text_table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NOMBRES</th>
+                                <th>APELLIDOS</th>
+                                <th>CARGO</th>
+                                <th>TELEFONO</th>
+                                <th>MOVIL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12 text-center">
+                    <a href="#" id="exitWin" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10 af-content-data ventana1">
+        <div class="row x_title">
+            <div class="col-lg-12">
+                <h3 class="af-title-h3">CONSULTA DE ACTIVO FIJO</h3>
+                <h4><small>Presenta la información completa de un activo fijo.</small> </h4>
+            </div>
+        </div>
+        <!--Informacion -->
+        <div class="row box-af-style1">
+            <div class="row">
+                <div class="col-md-2 form-group">
+                    <p class="dark">Id Ubicación: <b> {{consult.idUbic}}</b></p>
+                </div>
+                <div class="col-md-4 form-group">
+                    <p class="dark"><b>{{consult.ubicacion}}</b></p>
+                </div>
+                <div class="col-md-2 form-group">
+                    <p class="dark">Id Propiedad: <b> {{consult.idProp}}</b></p>
+                </div>
+                <div class="col-md-4 form-group">
+                    <p class="dark"><b>{{consult.propiedad}}</b></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <p><b>Id Activo Fijo:</b> {{ consult.idAf}}</p>
+                </div>
+                <div class="col-md-4 form-group">
+                    <p><b>Descripción:</b> {{ consult.descrip }}</p>
+                </div>
+                <div class="col-md-4 form-group">
+                    <p><b>Fecha de Compra:</b>{{ consult.fechac }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <p><b>Número de Serie:</b> {{ consult.num_serie }}</p>
+                </div>
+                <div class="col-md-4 form-group">
+                    <p><b>Estado del Activo:</b> {{ consult.edofisico }} </p>
+                </div>
+                <div class="col-md-4 form-group">
+                    <p><b>Costo Flete:</b> {{ consult.costo_flete }} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <p><b>Nro. Factura:</b> {{ consult.nrofact }}</p>
+                </div>
+                <div class="col-md-4 form-group">
+                    <p><b>Distribuidor:</b> {{ consult.dist }} </p>
+                </div>
+                <div class="col-md-4 form-group">
+                    <p><b>RIF:</b> {{ consult.dist_rif }} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <p><b>Costo:</b> {{ consult.costo_act }}</p>
+                </div>
+                <div class="col-md-4 form-group">
+                    <p><b>Impuesto:</b> {{ consult.imp_act }} </p>
+                </div>
+                <div class="col-md-4 form-group">
+                    <p><b>Total:</b> {{ consult.total_act }} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <p>Estado actual del activo fijo: <b>{{consult.estatus}}</b></p>
+                </div>
+            </div>
+        </div>
+        <!-- Amortizacion definidad -->
+        {% if consult.tipoAmortiz.estado=="yes" %}
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center">AMORTIZACIÓN DEFINIDA PARA EL ACTIVO</h5>
+            <div class="row form-inline">
+                <div class="col-md-4 form-group">
+                    <label for="ta01">Fórmula:</label>
+                    <input id="ta01" type="text" value="{{consult.tipoAmortiz.formula}}" disabled class="form-control" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="ta02">Tiempo estimado:</label>
+                    <input id="ta02" type="text" value="{{consult.tipoAmortiz.tiempo}}" disabled class="form-control text-right" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="ta03">Valor de Salvamento:</label>
+                    <input id="ta03" type="text" value="{{consult.tipoAmortiz.valors}}" disabled class="form-control text-right" />
+                </div>
+            </div>
+            <div class="row form-inline">
+                <div class="col-md-12 form-group">
+                    <label for="ta04">Observación:</label>
+                    <input id="ta04" type="text" value="{{consult.tipoAmortiz.observ}}" disabled class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center">AMORTIZACIONES CALCULADAS DURANTE CADA PERÍODO </h5>
+            {% if (estado_amortiz=='yes') %}
+            <table id="amortizaciones" class="table table-striped table-hover text_table no-footer dataTable" role="grid" aria-describedby="tblIdentificar_info">
+                <thead>
+                    <tr role="row">
+                        <th style="width:5%;">Mes</th>
+                        <th style="width:5%;">Año</th>
+                        <th style="width:5;">Periodo</th>
+                        <th style="width:10%;text-align:right">Residual</th>
+                        <th style="width:15%;text-align:right">Factor</th>
+                        <th style="width:10%;text-align:right">Reajustado</th>
+                        <th style="width:10%;text-align:right">Amortización Calculada</th>
+                        <th style="width:15%;text-align:right">Amortización Acumulada</th>
+                        <th style="width:15%;text-align:right">Costo Activo</th>
+                        <th style="width:10%;text-align:right">Relación %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for filaD in amortiz %}
+                    <tr>
+                        <td style="text-align:center">{{filaD.mes}}</td>
+                        <td style="text-align:center">{{filaD.anio}}</td>
+                        <td style="text-align:center">{{filaD.periodo}}</td>
+                        <td style="text-align:right">{{filaD.residual}}</td>
+                        <td style="text-align:right">{{filaD.factorOrig}}</td>
+                        <td style="text-align:right">{{filaD.nuevo}}</td>
+                        <td style="text-align:right">{{filaD.amortiz_calc}}</td>
+                        <td style="text-align:right">{{filaD.amortiz_acum}}</td>
+                        <td style="text-align:right">{{filaD.costo_activo}}</td>
+                        <td style="text-align:right">{{filaD.relacionPorc}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table> 
+            {% else %}           
+                {{ amortiz.message }}
+            {% endif %}
+        </div>
+        {% else  %}
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center" style="color:red">NO SE HA DEFINIDO EL TIPO DE AMORTIZACIÓN</h5>
+        </div>
+        {% endif %}
+        {% if mant.estado=="yes" %}
+        <!-- Informacion del traslado -->
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center">GASTOS EFECTUADO SOBRE EL ACTIVO</h5>
+            <table id="GastosMant" class="table table-striped table-hover text_table no-footer dataTable" role="grid" aria-describedby="tblIdentificar_info">
+                <thead>
+                    <tr role="row">
+                        <th style="width:5%;">ID</th>
+                        <th style="width:5%;">Tipo Gasto</th>
+                        <th style="width:10%;">Fecha Registro</th>
+                        <th style="width:10%;text-align:right">Costo Gasto</th>
+                        <th style="width:15%;text-align:right">Impuesto </th>
+                        <th style="width:10%;text-align:right">Total Gasto</th>
+                        <th style="width:15%;text-align:right">Costo Traslado</th>
+                        <th style="width:15%;text-align:right">Impuesto </th>
+                        <th style="width:15%;text-align:right">Total Traslado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for filaD in mant.gastos %}
+                    <tr>
+                        <td style="text-align:center">{{filaD.id}}</td>
+                        <td style="text-align:center">{{filaD.tipo}}</td>
+                        <td style="text-align:center">{{filaD.fecha}}</td>
+                        <td style="text-align:right">{{filaD.costo_fact}}</td>
+                        <td style="text-align:right">{{filaD.imp_fact}}</td>
+                        <td style="text-align:right">{{filaD.total_fact}}</td>
+                        <td style="text-align:right">{{filaD.costo_tras}}</td>
+                        <td style="text-align:right">{{filaD.imp_tras}}</td>
+                        <td style="text-align:right">{{filaD.total_tras}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table> 
+        </div>
+        {% else %}
+            {{mant.message}}
+        {% endif %}
+        <!-- Botones -->
+        <div class="row mt-4" style="clear:left">
+            <div class="col-md-12">
+                <div class="form-group" style="float:right;clear:right;"> 
+                    <a href="{{path('app_consulta')}}" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+        <!-- Botones -->
+    </div>
+    <div class="col-md-2">
+        <h4 class="_orange">INFORMACION:</h4>
+        <hr class="line_style" />
+        <p class="af-p-12">Se presenta todos los datos relacionado con el activo fijo.</p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+    $(document).ready(function(e){
+    }); // Fin Document Ready 
+</script>
+<style> 
+    @media (min-width:576px)  {
+        .form-inline .form-control {
+            width: none !important;
+        }
+    }
+</style>
+{% endblock %}

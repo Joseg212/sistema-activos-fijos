@@ -1,0 +1,47 @@
+<FacturaElectronica>
+    <Encabezado>
+        <Emisor>
+            <Nombre>Nombre del Emisor</Nombre>
+            <Identificacion>123456789</Identificacion>
+        </Emisor>
+        <Receptor>
+            <Nombre>Nombre del Receptor</Nombre>
+            <Identificacion>987654321</Identificacion>
+        </Receptor>
+        <FechaEmision>2024-12-14</FechaEmision>
+    </Encabezado>
+    <Detalles>
+        <Detalle>
+            <Descripcion>Producto o Servicio</Descripcion>
+            <Cantidad>1</Cantidad>
+            <PrecioUnitario>100.00</PrecioUnitario>
+            <Total>100.00</Total>
+        </Detalle>
+    </Detalles>
+    <FirmaDigital>
+        <Certificado>
+            <Version>3</Version>
+            <SerialNumber>1234567890</SerialNumber>
+            <Issuer>
+                <CountryName>VE</CountryName>
+                <OrganizationName>Autoridad Certificadora</OrganizationName>
+                <CommonName>CA Nombre</CommonName>
+            </Issuer>
+            <Validity>
+                <NotBefore>2024-01-01T00:00:00Z</NotBefore>
+                <NotAfter>2025-01-01T00:00:00Z</NotAfter>
+            </Validity>
+            <Subject>
+                <CountryName>VE</CountryName>
+                <OrganizationName>Nombre del Emisor</OrganizationName>
+                <CommonName>Nombre del Emisor</CommonName>
+            </Subject>
+            <SubjectPublicKeyInfo>
+                <Algorithm>RSA</Algorithm>
+                <PublicKey>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...</PublicKey>
+            </SubjectPublicKeyInfo>
+            <SignatureAlgorithm>SHA256withRSA</SignatureAlgorithm>
+            <SignatureValue>...</SignatureValue>
+        </Certificado>
+    </FirmaDigital>
+</FacturaElectronica>

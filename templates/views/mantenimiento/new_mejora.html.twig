@@ -1,0 +1,591 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{% block contentDashboard %}
+{{ form_start(form,{'attr':{'role':'form','novalidate':'novalidate','class':'form-inline'}}) }}
+<div class="row ml-2">
+    <div class="modal-sel-win" id="selectResp">
+        <div class="box-sel-win"> 
+            <div class="row x-title">
+                <h5 class="af-title-h5 text-center">Seleccionar Responsable</h5>
+                <div class="col-md-12">
+                    <table id="tblSelResp"  class="table table-striped table-hover text_table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>NOMBRES</th>
+                                <th>APELLIDOS</th>
+                                <th>CARGO</th>
+                                <th>TELEFONO</th>
+                                <th>MOVIL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-12 text-center">
+                    <a href="#" id="exitWin" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10 af-content-data ventana1">
+        <div class="row x_title">
+            <div class="col-lg-12">
+                <h3 class="af-title-h3">INGRESAR MEJORAMIENTO DE ACTIVO</h3>
+                <h4><small>Ingrese los costos que se encuentran individualmente  para obtener el valor neto de la mejora del activo fijo, se vale repetir el número de factura si es de importancia el detalle de lo mejorado.</small> </h4>
+            </div>
+        </div>
+        <!--Informacion -->
+        <div class="row box-af-style1">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <p><b>Activo Fijo:</b>{{ datosAF.descrip}}</p>
+                </div>
+                <div class="col-md-6 form-group">
+                    <p><b>Fecha de Compra:</b>{{ datosAF.fechac }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <p><b>Número de Serie:</b> {{ datosAF.num_serie }}</p>
+                </div>
+                <div class="col-md-6 form-group">
+                    <p><b>Estado del Activo:</b> {{ datosAF.edofisico }} </p>
+                </div>
+            </div>
+        </div>
+        <!-- Datos -->
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center">RESPONSABLE DEL ACTIVO</h5>
+            <div class="row">
+                {{ form_widget(form.unidad_tiempo) }}
+                {{ form_widget(form.numero_tiempo) }}
+                {{ form_widget(form.nro_fact) }}
+                {{ form_widget(form.proveedor) }}
+                {{ form_widget(form.proveedor_rif) }}
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.id_af) }}
+                    {{ form_widget(form.id_af,{'attr':{'value':idActivo}}) }}
+                </div>
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.fecha_fact) }}
+                    {{ form_widget(form.fecha_fact) }}
+                </div>
+                <div class="col-md-4 form-group">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    {{ form_label(form.id_resp) }}
+                    {{ form_widget(form.id_resp) }}
+                    <input type="text" placeholder="..." id="nameResp" disabled class="form-control" vale="" autocomplete="off" />
+                    <a href="#" id="idSearchResp" class="btn btn-secondary btn-search-form">BUSCAR  <i class="fa fa-search"></i></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="dat01Orig">Cargo:</label>
+                    <input type="text" id="dat01" placeholder="..." disabled class="form-control" autocomplete="off" value="" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="dat02Orig">Teléfono:</label>
+                    <input type="text" id="dat02" placeholder="..." disabled class="form-control" autocomplete="off" value="" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="dat03Orig">Móvil:</label>
+                    <input type="text" id="dat03" placeholder="..." disabled class="form-control" autocomplete="off" value="" />
+                </div>
+            </div>
+        </div>
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center">INFORMACION DE LA FACTURAS</h5>
+            <input id="idMantTemp" name="idMantTemp" type="hidden" value="{{ idMant}}" />
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <label for="art_proveedor" class="required">Nombre o Razón Social :</label>
+                    <input type="text" id="art_proveedor" name="art[proveedor]" required="required" class="form-control" placeholder="..." autocomplete="off">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="art_proveedor_rif" class="required">Rif:</label>
+                    <input type="text" id="art_proveedor_rif" name="art[proveedor_rif]" required="required" class="form-control" placeholder="..." autocomplete="off">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="art_fecha_fact" class="required">Fecha Factura:</label>
+                    <input type="date" id="art_fecha_fact" name="art[fecha_fact]" required="required" class="form-control" placeholder="...">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="art_nro_fact" class="required">Factura Nro.:</label>
+                    <input type="text" id="art_nro_fact" name="art[nro_fact]" required="required" class="form-control" placeholder="..." autocomplete="off">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="art_telefono_prov" class="required">Teléfono:</label>
+                    <input type="text" id="art_telefono_prov" name="art[telefono_prov]" required="required" class="form-control" placeholder="..." autocomplete="off">
+                </div>
+            </div>
+            <hr style="width:100%"> 
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="art_costo_fact" class="required">Costo:</label>
+                    <input type="text" id="art_costo_fact" name="art[costo_fact]" required="required" class="form-control text-right" placeholder="..." autocomplete="off" onkeydown="mascara(event,'999999999.99',',','.')" value="0.00">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="art_imp_fact" class="required">Impuesto:</label>
+                    <input type="text" id="art_imp_fact" name="art[imp_fact]" required="required" class="form-control text-right" placeholder="..." autocomplete="off" onkeydown="mascara(event,'999999999.99',',','.')" value="0.00">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="art_total_fact" class="required">Total Factura:</label>
+                    <input type="text" id="art_total_fact" name="art[total_fact]" required="required" class="form-control text-right" placeholder="..." autocomplete="off" readonly="readonly" value="0.00">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 form-group">
+                    <label for="art_detalle">Detalle</label>
+                    <input type="text" id="art_detalle" name="art[detalle]" onKeyDown="solo_texto(event)" placeholder="..." autocomplete="off" value="" class="form-control" />
+                </div>
+                <div class="col-md-4 form-group text-right">
+                    <div style="width:100%">
+                        <a href="#" id="addInvoice" class="btn btn-secondary btn-search-form">AGREGAR FACTURA  <i class="fa fa-document fa-personal1"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr style="width:100%"> 
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <table id="tblMejora"  class="table table-striped table-hover text_table" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>FACTURA</th>
+                                <th>NOMBRE O RAZÓN SOCIAL</th>
+                                <th>DETALLE</th>
+                                <th>COSTO</th>
+                                <th>IMPUESTO</th>
+                                <th>TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <p><b>Seleccione para poder eliminar una factura.</b></p>
+            <hr style="width:100%"> 
+            <h5 class="af-title-h5 text-center">RESUMEN DE MEJORA</h5>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.monto_fact) }}
+                    {{ form_widget(form.monto_fact,{attr:{'value':costoFact}}) }}
+                </div>
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.monto_iva) }}
+                    {{ form_widget(form.monto_iva,{attr:{'value':impFact}}) }}
+                </div>
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.total_factura) }}
+                    {{ form_widget(form.total_factura,{attr:{'value':totalFact}}) }}
+                </div>
+            </div>
+            <hr style="width:100%"> 
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.banco) }}
+                    {{ form_widget(form.banco) }}
+                </div>
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.tipo_doc) }}
+                    {{ form_widget(form.tipo_doc) }}
+                </div>
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.numero_doc) }}
+                    {{ form_widget(form.numero_doc) }}
+                </div>
+            </div>
+        </div>
+        <div class="row box-af-style1" >
+            <h5 class="af-title-h5 text-center">DATOS ADICIONALES</h5>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    {{ form_label(form.detalle) }}
+                    {{ form_widget(form.detalle) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.si_traslado) }}
+                    {{ form_widget(form.si_traslado) }}
+                </div>
+                <div class="col-md-8 form-group">
+                    <p class="af-p-12 af-p-info">En caso de haberse cobrado flete para la reparación del activo active la casilla "Incluir costo de flete".</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.costo_traslado) }}
+                    {{ form_widget(form.costo_traslado,{attr:{'value':'0.00'}}) }}
+                </div>
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.imp_traslado) }}
+                    {{ form_widget(form.imp_traslado,{attr:{'value':'0.00'}}) }}
+                </div>
+                <div class="col-md-4 form-group">
+                    {{ form_label(form.total_traslado) }}
+                    {{ form_widget(form.total_traslado,{attr:{'value':'0.00'}}) }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <span class="text-danger">{{ form_errors(form.id_af) }}</span>
+                <span class="text-danger">{{ form_errors(form.id_resp) }}</span> 
+                <span class="text-danger">{{ form_errors(form.monto_fact) }}</span> 
+                <span class="text-danger">{{ form_errors(form.detalle) }}</span>
+
+            </div>
+        </div>
+        <!-- Botones -->
+        <div class="row mt-4" style="clear:left">
+            <div class="col-md-12">
+                <div class="form-group" style="float:right;clear:right;"> 
+                    {{ form_widget(form.write) }}
+                    <a href="{{path('app_mejora',{'idActivo':idActivo})}}" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+        <!-- Botones -->
+    </div>
+    <div class="col-md-2">
+        <h4 class="_orange">INFORMACION:</h4>
+        <hr class="line_style" />
+        <p class="af-p-12">Ingrese los datos solicitado, para culminar y guardar la información hacer clic en el Guardar</p>
+    </div>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+    var tipoRespSel = 0;
+    var tblMejora = null;
+    var mej_monto_fact=0.00;
+    var mej_monto_iva=0.00;
+    var mej_total_fact=0.00;
+    var contador=0;    
+
+    $(document).ready(function(e){
+        // Responsable
+        $("#idSearchResp").click(function(event){
+            event.preventDefault();
+            loadLstSelResp();
+
+            $("#selectResp").fadeIn("slow",function(e){
+                $("#selectResp").css("display","inherit");
+            });
+
+        });
+        // Salir de la ventana de Seleccion 
+        $("#exitWin").click(function(event){
+            event.preventDefault();
+            tipoRespSel = 0;
+            $("#selectResp").fadeOut("slow",function(e){
+                $("#selectResp").css("display","none");
+            });
+        });
+        // Seleccion de Responsable 
+        $(document).on("click",".tr-select",function(event){
+            //console.log("Seleccionado:" + $(this).attr("id"));
+            idCode = String($(this).attr("id"));
+            var idNombre = "#name_" + String($(this).attr("id"));
+            var Nombre = $(idNombre).val();
+
+            var OtroDatos = String($("#cadena_"+idCode).val());
+            var arrOtroDatos = OtroDatos.split('/');
+
+            $("#mantenimiento_id_resp").val(idCode);
+            $("#nameResp").val(Nombre);
+
+            $("#dat01").val(arrOtroDatos[0]);
+            $("#dat02").val(arrOtroDatos[1]);
+            $("#dat03").val(arrOtroDatos[2]);
+
+            $("#selectResp").fadeOut("slow",function(e){
+                $("#selectResp").css("display","none");
+            });
+
+        });
+
+        $("#mantenimiento_monto_fact").change(function(e){
+            var monto = parseFloat($(this).val());                
+            var impuesto = parseFloat(String($("#mantenimiento_monto_iva").val()));
+
+            var total = (monto+impuesto);
+
+            $("#mantenimiento_total_factura").val(total);
+
+        })
+        $("#mantenimiento_monto_iva").change(function(e){
+            var impuesto = parseFloat($(this).val());                
+            var monto = parseFloat(String($("#mantenimiento_monto_fact").val()));
+            var total = (monto+impuesto).toFixed(2);
+            $("#mantenimiento_total_factura").val(total);
+        })
+
+        $("#art_costo_fact").change(function(e){
+            var monto = parseFloat(String($(this).val()).replace(',',''));
+            var impuesto = parseFloat(String($("#art_imp_fact").val()).replace(',',''));
+
+            var total = (monto+impuesto).toFixed(2);
+
+            $("#art_total_fact").val(String(total));
+
+        })
+        $("#art_imp_fact").change(function(e){
+            var impuesto = parseFloat(String($(this).val()).replace(',',''));                
+            var monto = parseFloat(String($("#art_costo_fact").val()).replace(',',''));
+            var total = (monto+impuesto);
+            $("#art_total_fact").val(String(total));
+        })
+
+        $("#mantenimiento_si_traslado").change(function(event){
+            if ($(this).is(":checked"))
+            {
+                $("#mantenimiento_costo_traslado").removeAttr("readonly");
+                $("#mantenimiento_imp_traslado").removeAttr("readonly");
+            } else {
+                $("#mantenimiento_costo_traslado").attr("readonly",true);
+                $("#mantenimiento_imp_traslado").attr("readonly",true);
+                $("#mantenimiento_costo_traslado").val("0.00");
+                $("#mantenimiento_imp_traslado").val("0.00");
+                $("#mantenimiento_total_traslado").val("0.00");
+            }
+        });
+
+        if ($("#mantenimiento_si_traslado").is(":checked"))
+        {
+            $("#mantenimiento_costo_traslado").removeAttr("readonly");
+            $("#mantenimiento_imp_traslado").removeAttr("readonly");
+        } else {
+            $("#mantenimiento_costo_traslado").attr("readonly",true);
+            $("#mantenimiento_imp_traslado").attr("readonly",true);
+        }
+
+        $("#mantenimiento_costo_traslado").change(function(e){
+            var monto = parseFloat(String($(this).val()).replace(',',''));                
+            var impuesto = parseFloat(String($("#mantenimiento_imp_traslado").val()).replace(',',''));
+
+            var total = (monto+impuesto).toFixed(2);
+
+            $("#mantenimiento_total_traslado").val(total);
+
+        });
+        $("#mantenimiento_imp_traslado").change(function(e){
+            var impuesto = parseFloat(String($(this).val()).replace(',',''));                
+            var monto = parseFloat(String($("#mantenimiento_costo_traslado").val()).replace(',',''));
+            var total = (monto+impuesto).toFixed(2);
+            $("#mantenimiento_total_traslado").val(total);
+        });
+        loadLstFactMejora()
+
+        $("#addInvoice").click(function(event){
+            event.preventDefault();
+            // Verificar los ingresos de los datos 
+            var proveedor   = String($("#art_proveedor").val());
+            var prov_rif    = String($("#art_proveedor_rif").val());
+            var fecha_fact  = String($("#art_fecha_fact").val());
+            var nro_fact    = String($("#art_nro_fact").val());
+            var telf_prov   = String($("#art_telefono_prov").val());
+            var costo_fact  = parseFloat(String($("#art_costo_fact").val()).replace(',',''));
+            var imp_fact    = parseFloat(String($("#art_imp_fact").val()).replace(',',''));
+            var total_fact  = parseFloat(String($("#art_total_fact").val()).replace(',',''));
+            var detalle     = String($("#art_detalle").val());
+
+            if (proveedor.length==0){
+                $("#art_proveedor").focus();
+                swal("Mejora de Activo","Debe ingresar el proveedor","error");
+                return;
+            }
+            if (prov_rif.length==0){
+                $("#art_proveedor_rif").focus();
+                swal("Mejora de Activo","Indique el rif del proveedor","error");
+                return;
+            }
+            if (fecha_fact.length==0){
+                $("#art_fecha_fact").focus();
+                swal("Mejora de Activo","Escriba la fecha la factura","error");
+                return;
+            }
+            if (nro_fact.length==0){
+                $("#art_nro_fact").focus();
+                swal("Mejora de Activo","Debe ingresar el nro de la factura","error");
+                return;
+            }
+            if (costo_fact<=0){
+                $("#art_costo_fact").focus();
+                swal("Mejora de Activo","Debe ingresar el costo del producto sin impuesto","error");
+                return;
+            }
+            if (detalle.length==0){
+                $("#art_detalle").focus();
+                swal("Mejora de Activo","Es obligatorio el detalle del articulo o mejora","error");
+                return;
+            }
+
+            var idMant = $("#idMantTemp").val();
+            
+            total_fact = costo_fact + imp_fact;
+
+            $("#art_total_fact").val(String(total_fact));
+
+            ajaxCarga = "{{ path('ajax_actionFactMejora')}}";
+
+            $.ajax({
+                data:{'proveedor':proveedor,'prov_rif':prov_rif,'fecha_fact':fecha_fact,'nro_fact':nro_fact,
+                'telf_prov':telf_prov,'costo_fact':costo_fact,'imp_fact':imp_fact,'total_fact':total_fact,
+                'detalle':detalle,'action':'insert','idMant':idMant},
+                type:'post',
+                dataType:'json',
+                url:ajaxCarga,
+                error:function(err, text,thr){
+                    $("body").empty();
+                    $("body").html(err.responseText);
+                },
+                success: function(result){
+                    if (result.ok=='01'){
+                        // Si se guarda correcto
+
+                        $("#mantenimiento_monto_fact").val(result.costo_fact.toString());
+                        $("#mantenimiento_monto_iva").val(result.imp_fact.toString());
+                        $("#mantenimiento_total_factura").val(result.total_fact.toString());
+
+                        loadLstFactMejora();
+
+                        contador++;
+
+                        $("#art_proveedor").val("");
+                        $("#art_proveedor_rif").val("");
+                        $("#art_fecha_fact").val("");
+                        $("#art_nro_fact").val("");
+                        $("#art_telefono_prov").val("");
+                        $("#art_costo_fact").val("0.00");
+                        $("#art_imp_fact").val("0.00");
+                        $("#art_total_fact").val("0.00");
+                        $("#art_detalle").val("");
+                    } else {
+                        swal("Mejora en Activo",result.msg,"error");
+                    }
+                }
+            });
+        });
+    }); // Fin Document Ready 
+
+
+    // La lista de seleccion de responsable
+    function loadLstSelResp(){
+        console.log("Carga la lista...");
+
+        var rootAjaxList = "{{ path('ajax_lstResponsable') }}";
+
+        tblSelResp = $('#tblSelResp').dataTable({
+                destroy:true,
+                serverSide: true,
+                searching: true,
+                lengthChange: false,
+                pageLength:8,
+                language:{
+                    info:"Mostrando  _END_/_TOTAL_ ",
+                    infoEmpty:"Mostrando  1 de 0 ", 
+                    paginate:{
+                        first:"Primero",
+                        previous:"Previo",
+                        next:"Próximo",
+                        last:"Último"
+                    }
+                },
+                dom: '<"btnSearch">Pfrtip',
+                ajax:{
+                    method:"POST",
+                    dataType:"JSON",
+                    url:rootAjaxList,
+                    error: function(err,txt,thr){
+                        $("body").empty();
+                        $("body").html(err.responseText);
+                    }
+                },
+                columns:[
+                    {data:"id"},
+                    {data:"nombre"},
+                    {data:"apellido"},
+                    {data:"cargo"},
+                    {data:"telefono"},
+                    {data:"movil"},
+                ],
+                deferRender: true
+        });
+
+        $("div.btnSearch").html('<button type="button" class="btn btn-dark" id="SearchData"><i class="fa fa-search"></i></button>');	            
+    }
+
+    function loadLstFactMejora(){
+
+        var rootAjaxList = "{{ path('ajax_lstFactMejora') }}";
+        var idMant = $("#idMantTemp").val();
+
+        tblMejora = $('#tblMejora').dataTable({
+                destroy:true,
+                serverSide: true,
+                searching: true,
+                lengthChange: false,
+                pageLength:5,
+                language:{
+                    info:"Mostrando  _END_/_TOTAL_ ",
+                    infoEmpty:"No se tiene datos", 
+                    paginate:{
+                        first:"Primero",
+                        previous:"Previo",
+                        next:"Próximo",
+                        last:"Último"
+                    }
+                },
+                dom: '<"btnSearch">Pfrtip',
+                ajax:{
+                    data:{'idMant':idMant, 'native':'not'},
+                    method:"POST",
+                    dataType:"JSON",
+                    url:rootAjaxList,
+                    error: function(err,txt,thr){
+                        console.log("Pasa por aqui....set!!")
+                        $("body").empty();
+                        $("body").html(err.responseText);
+                    }
+                },
+                columns:[
+                    {data:"id"},
+                    {data:"fact"},
+                    {data:"proveedor"},
+                    {data:"detalle"},
+                    {data:"costo"},
+                    {data:"impuesto"},
+                    {data:"total"},
+
+                ],
+                deferRender: true
+        });
+        $("div.btnSearch").html('<button type="button" class="btn btn-dark" id="SearchData"><i class="fa fa-search"></i></button>');	            
+        $("#tblMejora_wrapper").css("width","100%");
+    }
+
+
+</script>
+<style> 
+    @media (min-width:576px)  {
+        .form-inline .form-control {
+            width: none !important;
+        }
+    }
+</style>
+{% endblock %}

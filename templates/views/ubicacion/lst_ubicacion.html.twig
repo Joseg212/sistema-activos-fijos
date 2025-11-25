@@ -1,0 +1,269 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{% block contentDashboard %}
+    <div class="row">
+        <!--Pantalla oculta para seleccionar tipo de opciones-->
+        <div class="msg_sel" id="msg01">
+                <div id="message_sel">
+                    <h4 class="_orange" style="text-align:left"><span class="glyphicon glyphicon-list-alt" style="margin-right:10px;"></span>SELECCION</h4>
+                    <hr class="line_style" />
+                    <p style="text-align:left" class="af-text-win-select" >Se ha seleccionado el siguiente dato:</p>
+                    <label id="msg1"></label>
+                    <label id="msg2"></label>
+                    <p style="text-align:left;" class="af-text-win-select">¿Que desea realizar?
+                    </p>
+                    <a  href="#" id="editWin" class="btn btn-ttc">
+                        <span class="glyphicon glyphicon-edit" style="margin-right:10px;"></span>Editar
+                    </a>
+                    <a href="#" id="deleteWin" class="btn btn-ttc" onclick="deleteData(event)">
+                        <span class="glyphicon glyphicon-remove" style="margin-right:10px;"></span>Eliminar
+                    </a>
+                    <a href="javascript://salir ;" id="outwin" class="btn btn-ttc">
+                        <span class="glyphicon glyphicon-log-out" style="margin-right:10px;"></span>Salir
+                    </a>
+                </div>
+        </div>
+        <!-- Fin Pantalla oculta para seleccionar tipo de opciones-->
+
+        <div class="col-lg-10">
+            <div class="row">
+                <div class="col-lg-6 left title_modify">
+                        <h3 class="af-title-h3">UBICACION</h3>
+                        <h4><small>Lista de ubicaciones ingresadas a la propiedad</small> </h4>
+                </div>
+                <div class="col-lg-6 text-right" style="margin-bottom:12px;" >
+                </div>
+            </div>
+            <hr class="line-style-top-table" />
+            <div class="row ventana1 form-inline">
+                <div class="col-md-4 form-group">
+                    <label for="selPropiedad" class="requerid">Propiedad:</label>
+                    <select id="selPropiedad" class="form-control">
+                        <option value="select" selected>Seleccione</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            <table id="tblUbicacion"  class="table table-striped table-hover text_table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>UBICACIÓN</th>
+                        <th>NOTA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-2">
+                <h4 class="_orange">FILTRO:</h4>
+                <hr class="line_style" />
+                <p class="af-p-12">Deberá seleccionar la propiedad para que pueda ver o ingresar ubicaciones.</p>
+                <br>
+                <h4 class="_orange">LISTADO:</h4>
+                <hr class="line_style" />
+                <p class="af-p-12">Seleccione algun items y haga clic para poder modificarlo, o eliminarlo.</p>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-6 col-right">
+                <a  href="{{ path('new_ubicacion',{'idPropiedad':'SN'}) }}" id="newData" class="btn btn-dark" style="visibility:hidden;">Agregar</a>
+                <a  href="{{ path('app_default') }}" class="btn btn-dark">Retornar</a>
+        </div>
+        <div class="col-lg-2"> 
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+    var tblUbicacion=null;
+    var idCode = "";
+    var idPropiedad="";
+
+    $(document).ready(function(e){
+        loadLstUbicaciones();
+
+        $(document).on("click",".tr-select",function(event){
+            //console.log("Seleccionado:" + $(this).attr("id"));
+            idCode = String($(this).attr("id"));
+            var idNombre = "#name_" + String($(this).attr("id"));
+            var Nombre = $(idNombre).val();
+
+            var rutaEdit = "{{ path('edit_ubicacion',{idCode:'invertCode'}) }}";
+
+            rutaEdit = rutaEdit.replace('invertCode',idCode);
+
+            $("#editWin").attr("href",rutaEdit);
+
+            $("#msg1").empty();
+            $("#msg2").empty();
+            $("#msg1").html("<b>Id:</b>"+idCode);
+            $("#msg2").html("<b>Descrip:</b>"+Nombre);
+
+            $("#msg01").fadeIn('slow',function(e){
+                $("#msg01").css("display","inherit");
+            });
+        });
+
+        $("#outwin").click(function(e){
+            e.preventDefault();
+            $("#msg01").fadeOut('slow',function(e){
+                $("#msg01").css("display","none");
+            })
+        });
+
+        $("#SearchData").click(function(e){
+            e.preventDefault();
+            console.log("Hizo clic");
+            loadLstUbicaciones();
+        })
+
+        var rootSelProp="{{ path('ajax_sel_prop') }}";
+
+        $.ajax({
+            data:{},
+            method:'post',
+            dataType:'json',
+            url:rootSelProp,
+            error:function(err,txt,thr){
+                $('body').empty();
+                $('body').html(err.responseText);
+            },
+            success:function(result){
+                if (result.ok=='01'){
+                    var idProp = 'select';
+                    /*  Verificar la Cookies */
+                    if (!!$.cookie('idPropiedad')){
+                        idProp = $.cookie('idPropiedad');
+                        idPropiedad = $.cookie('idPropiedad');
+                    }
+                    var htmlCode = '';
+                    $.each(result.elements,function(posc,item){
+                        if (idProp==item.id){
+                            htmlCode+='<option value="'+item.id+'" selected>'+item.data+'</option>\n';
+                        } else {
+                            htmlCode+='<option value="'+item.id+'">'+item.data+'</option>\n';
+                        }
+                    });
+                    $("#selPropiedad").empty();
+                    $("#selPropiedad").append(htmlCode);
+                    //loadLstUbicaciones();
+                    $("#selPropiedad").change();
+                } else {
+                    console.log(result.msg);
+                }
+            }
+        });
+
+        $("#selPropiedad").change(function(e){
+            idPropiedad = $(this).val();
+
+            $.cookie('idPropiedad',idPropiedad);
+
+            loadLstUbicaciones();
+            
+            var rootNew = "{{ path('new_ubicacion',{'idPropiedad':'valorCamb'}) }}";
+
+            rootNew = rootNew.replace("valorCamb",idPropiedad);
+
+            if (idPropiedad=='select'){
+                $("#newData").css("visibility","hidden");
+            } else {
+                $("#newData").attr("href",rootNew);
+                $("#newData").css("visibility","inherit");
+            }
+        });
+
+    }); // Fin de Document Ready
+
+    function deleteData(event){
+        event.preventDefault();
+
+        rootDelete = "{{ path('delete_ubicacion') }}";
+
+        swal({
+            title: '¿Esta seguro de eliminar la ubicación registrada?',
+            text: "No podrás deshacer está acción.",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Eliminar!'
+        }).then((result)=>{
+            if (result.value){
+            $.ajax({
+                data:{'idCode':idCode},
+                type:'post',
+                dataType:'json',
+                url: rootDelete,
+                error: function(err,txt,thr){
+                $('body').html(err.responseText);
+                },
+                success: function(result){
+                if (result.ok=='01'){
+                    loadLstUbicaciones();
+                    swal("Ubicación",result.msg,"success");
+                } else {
+                    swal("Ubicación",result.msg,"error");
+                }
+                }
+
+            });
+            }
+        });
+
+        $("#msg01").fadeOut('slow',function(e){
+            $("#msg01").css("display","none");
+        });
+    }
+
+    function loadLstUbicaciones(){
+        var rootAjaxList = "{{ path('ajax_lstUbicaciones') }}";
+
+        tblUbicacion = $('#tblUbicacion').dataTable({
+                destroy:true,
+                serverSide: true,
+                searching: true,
+                lengthChange: false,
+                pageLength:35,
+                language:{
+                    info:"Mostrando  _END_/_TOTAL_ ",
+                    infoEmpty:"No se tiene datos", 
+                    paginate:{
+                        first:"Primero",
+                        previous:"Previo",
+                        next:"Próximo",
+                        last:"Último"
+                    }
+                },
+                dom: '<"btnSearch">Pfrtip',
+                ajax:{
+                    data:{'idPropiedad':idPropiedad},
+                    method:"POST",
+                    dataType:"JSON",
+                    url:rootAjaxList,
+                    error: function(err,txt,thr){
+                        $("body").empty();
+                        $("body").html(err.responseText);
+                    }
+                },
+                columns:[
+                    {data:"id"},
+                    {data:"ubicacion"},
+                    {data:"nota"}
+                ],
+                deferRender: true
+        });
+        $("div.btnSearch").html('<button type="button" class="btn btn-dark" id="SearchData"><i class="fa fa-search"></i></button>');	            
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'desings/baseDashboard.html.twig' %}
+{# José Hernández email: jghernandez053@gmail.com #}
+{% block contentDashboard %}
+{{ form_start(form,{'attr':{'role':'form','novalidate':'novalidate','class':'form-inline'}}) }}
+<div class="row ml-2">
+    <div class="col-md-10 af-content-data ventana1">
+        <div class="row x_title">
+            <div class="col-lg-12">
+                <h3 class="af-title-h3">FÓRMULA DE AMORTIZACIÓN DE UN ACTIVO FIJO (CAMBIAR DATOS)</h3>
+                <h4><small>Verifique la información del activo registrado e ingrese los datos para la  amortización de activo fijo.</small> </h4>
+            </div>
+        </div>
+        <!--Informacion -->
+        <div class="row box-af-style1">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <p><b>Activo Fijo:</b>{{ datosAF.descrip}}</p>
+                </div>
+                <div class="col-md-6 form-group">
+                    <p><b>Fecha de Compra:</b>{{ datosAF.fechac }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <p><b>Número de Factura:</b>{{ datosAF.nrofact }}</p>
+                </div>
+                <div class="col-md-6 form-group">
+                    <p><b>Distribuidor:</b>{{ datosAF.distrib }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <p><b>Costo:</b>{{ datosAF.costo }}</p>
+                </div>
+                <div class="col-md-6 form-group">
+                    <p><b>Impuesto:</b>{{ datosAF.impuesto }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <p><b>Costo Total:</b> {{ datosAF.costot }}</p>
+                </div>
+                <div class="col-md-6 form-group">
+                    <p><b>Flete:</b> {{ datosAF.flete }} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <p><b>Código asignado al activo:</b> {{ datosAF.code }}</p>
+                </div>
+                <div class="col-md-6 form-group">
+                    <p><b>Estado del Activo:</b> {{ datosAF.edofisico }} </p>
+                </div>
+            </div>
+        </div>
+        <!-- Datos -->
+        <div class="row box-af-style1" >
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    {{ form_label(form.id_af) }}
+                    {{ form_widget(form.id_af) }}
+                </div>
+                <div class="col-md-6 form-group">
+                    {{ form_label(form.id_tipom) }}
+                    {{ form_widget(form.id_tipom) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    {{ form_label(form.formula) }}
+                    {{ form_widget(form.formula) }}
+                    <span class="text-danger">{{ form_errors(form.formula) }}</span>          
+                </div>
+                <div class="col-md-6 form-group">
+                    {{ form_label(form.tiempo_estimado) }}
+                    {{ form_widget(form.tiempo_estimado) }}
+                    <span class="text-danger">{{ form_errors(form.tiempo_estimado) }}</span>          
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    {{ form_label(form.valor_salvamento) }}
+                    {{ form_widget(form.valor_salvamento) }}
+                    <span class="text-danger">{{ form_errors(form.valor_salvamento) }}</span>          
+                </div>
+                <div class="col-md-9 form-group">
+                    {{ form_label(form.observ) }}
+                    {{ form_widget(form.observ) }}
+                    <span class="text-danger">{{ form_errors(form.observ) }}</span>          
+                </div>
+            </div>
+        </div>
+        <!-- Botones -->
+        <div class="row mt-4" style="clear:left">
+            <div class="col-md-12">
+                <div class="form-group" style="float:right;clear:right;"> 
+                    {{ form_widget(form.write) }}
+                    <a href="{{path('app_tipo_amortiz')}}" class="btn btn-dark">Retornar</a>
+                </div>
+            </div>
+        </div>
+        <!-- Botones -->
+    </div>
+    <div class="col-md-2">
+        <h4 class="_orange">INFORMACION:</h4>
+        <hr class="line_style" />
+        <p class="af-p-12">Ingrese los datos solicitado, para culminar y guardar la información hacer clic en el Guardar</p>
+    </div>
+</div>
+{{ form_end(form) }}
+
+{% endblock %}
+
+{% block javascriptsFooter %}
+
+<script type="text/javascript">
+
+    $(document).ready(function(e){
+
+    });
+
+</script>
+<style> 
+    @media (min-width:576px)  {
+        .form-inline .form-control {
+            width: none !important;
+        }
+    }
+</style>
+{% endblock %}
