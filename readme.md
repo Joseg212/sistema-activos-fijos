@@ -14,6 +14,8 @@ Sistema desarrollado en **Symfony** para el control y gestión integral de activ
 - 💹 **Ajuste Inflacionario** - Cálculo y aplicación de ajustes por inflación
 - 📋 **Inventario Completo** - Control detallado de todos los activos
 
+*  **Nota:** Los reportes del sistema fueron desarrollados con JasperReport, empleando un comando de bajo nivel, es necerio la instalación java sdk, y las librerias de jasper reports para generación del reporte. Aunque es mejor generar los reportes con un generador de PDF, ya que para este sistema no es de importancia reportes complejos. *
+
 ---
 ![Estructura del proyecto](bin/portada1.png)
 ---
@@ -63,8 +65,8 @@ CREATE DATABASE appactivofijo;
 
 2. **Ejecutar scripts de base de datos:**
 ```bash
-# Los scripts SQL se encuentran en la carpeta /database
-mysql -u usuario -p appactivofijo < database/scripts/appactivofijo.sql
+# Los scripts SQL se encuentran en la carpeta raiz
+mysql -u usuario -p appactivofijo < database/appactivofijo.sql
 ```
 
 ### 🔒 Configuración de Variables de Entorno
@@ -87,7 +89,12 @@ php bin/console cache:clear --env=prod
 # Opcional: cargar datos iniciales
 php bin/console doctrine:fixtures:load --env=prod
 ```
+Para ingresar al sistema el usuario es admin@system.com la constraseña admin@123.
+Si quiere crear una constraseña personalizada vaya al sitio web:
 
+https://bcrypt-generator.com/
+Indique el cost factor en 13, las constraseñas no se pueden descomponer. 
+---
 ## 📁 Estructura del Proyecto
 
 ```
